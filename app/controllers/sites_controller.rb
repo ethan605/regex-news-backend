@@ -1,7 +1,9 @@
 class SitesController < ApplicationController
   def index
-    content = Rule.apply(params[:url])
+    @content = Rule.apply(params[:url])
 
-    render json: content
+    respond_to do |format|
+      format.html
+    end
   end
 end
