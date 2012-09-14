@@ -13,6 +13,7 @@ class Rule
       'a href=\'/' => 'a href=\'http://localhost:3000/sites?url=http://dantri.com.vn/',
       'a href="http://dantri' => 'a href="http://localhost:3000/sites?url=http://dantri',
       'a href=\'http://dantri' => 'a href=\'http://localhost:3000/sites?url=http://dantri',
+      '(?<=<link rel="Shortcut Icon" href=")/' => 'http://dantri.com.vn/',
       '<div class="header".*(?=<div class="nav-wrap">)' => '',
       '<div class="footer box19".*(?=</form>)' => '',
       '<div class="newest-of-cat".*(?=<div class="fl wid470")' => '',
