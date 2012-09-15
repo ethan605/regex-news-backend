@@ -23,12 +23,14 @@ class Rule
     },
     'bongdaplus.vn' => {
       '(?<==("|\'))\s*/' => 'http://bongdaplus.vn/',
-      '(?<=href=("|\'))http://(?!bongdaplus.vn/(App_Themes/Default/Styles|favicon.ico))' => 'http://localhost:3000/sites?url=http://',
+      '(?<=href=("|\'))http://(?!bongdaplus.vn/(App_Themes/Default|favicon.ico))' => 'http://localhost:3000/sites?url=http://',
       '<div id="toolbar".*(?=<div class="foldwrap")' => '<div class="foldwrap">',
       '<table id="ctl00_Footer_Embedded_Ads_Script".*</table>' => '',
       '<div class="sidebar grid_8 omega">.*</script>' => '</div></div>',
+      '<div class="sidebar grid_8 omega">.*(?=<div id="footer-ads")' => '</div></div>',
       '<div id="most-read-stories".*(?=<img)' => '',
       '(?<=<div class="story-body">)<object.*</object>' => '',
+      '<div class="starworld clearfix".*(?=<div class="mainbox clearfix ads">)' => '',
       'grid_16' => 'grid_24'
     }
   }
