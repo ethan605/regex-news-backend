@@ -9,8 +9,8 @@ class Rule
   CHANGE_ELEMENTS     = {
     'dantri.com.vn' => {
       '<input[^>]*/>' => '',
-      'a href="/' => 'a href="http://localhost:3000/sites?url=http://dantri.com.vn/',
-      'a href=\'/' => 'a href=\'http://localhost:3000/sites?url=http://dantri.com.vn/',
+      'href="/' => 'href="http://localhost:3000/sites?url=http://dantri.com.vn/',
+      'href=\'/' => 'href=\'http://localhost:3000/sites?url=http://dantri.com.vn/',
       'a href="http://dantri' => 'a href="http://localhost:3000/sites?url=http://dantri',
       'a href=\'http://dantri' => 'a href=\'http://localhost:3000/sites?url=http://dantri',
       '(?<=<link rel="Shortcut Icon" href=")/' => 'http://dantri.com.vn/',
