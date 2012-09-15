@@ -22,8 +22,8 @@ class Rule
       '<div class="fl wid470"' => '<div class="fl"'
     },
     'bongdaplus.vn' => {
-      '="\s*/' => '="http://bongdaplus.vn/',
-      '=\'\s*/' => '=\'http://bongdaplus.vn/',
+      '(?<==("|\'))\s*/' => 'http://bongdaplus.vn/',
+      '(?<=href=("|\'))http://(?!bongdaplus.vn/(App_Themes/Default/Styles|favicon.ico))' => 'http://localhost:3000/sites?url=http://',
       '<div id="toolbar".*(?=<div class="foldwrap")' => '<div class="foldwrap">',
       '<table id="ctl00_Footer_Embedded_Ads_Script".*</table>' => '',
       '<div class="sidebar grid_8 omega">.*</script>' => '</div></div>',
