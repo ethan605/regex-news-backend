@@ -9,11 +9,8 @@ class Rule
   CHANGE_ELEMENTS     = {
     'dantri.com.vn' => {
       '<input[^>]*/>' => '',
-      'href="/' => 'href="http://localhost:3000/sites?url=http://dantri.com.vn/',
-      'href=\'/' => 'href=\'http://localhost:3000/sites?url=http://dantri.com.vn/',
-      'a href="http://dantri' => 'a href="http://localhost:3000/sites?url=http://dantri',
-      'a href=\'http://dantri' => 'a href=\'http://localhost:3000/sites?url=http://dantri',
-      '(?<=<link rel="Shortcut Icon" href=")/' => 'http://dantri.com.vn/',
+      '(?<=href=("|\'))/(?!App_Themes/Default/Images/favico.ico)' => 'http://localhost:3000/sites?url=http://dantri.com.vn/',
+      '(?<=<link rel="Shortcut Icon" href=")/' => 'http://dantri.com.vn',
       '<div class="header".*(?=<div class="nav-wrap">)' => '',
       '<div class="footer box19".*(?=</form>)' => '',
       '<div class="newest-of-cat".*(?=<div class="fl wid470")' => '',
