@@ -5,9 +5,9 @@ class Rule
   STRIP_BEFORE_TAGS   = [/[\n\r\t]*</m, '<']
   STRIP_AFTER_TAGS    = [/>[\n\r\t]*/m, '>']
   STRIP_CONTROLS      = [/[\n\r\t]+/m, ' ']
-  REMOVE_SCRIPTS      = [/<script[^<]*<\/script>/m, '']
   CHANGE_ELEMENTS     = {
     'dantri.com.vn' => {
+      '<script[^<]*</script>' => '',
       '<input[^>]*/>' => '',
       '(?<=href=("|\'))/(?!App_Themes/Default/Images/favico.ico)' => 'http://localhost:3000/sites?url=http://dantri.com.vn/',
       '(?<=<link rel="Shortcut Icon" href=")/' => 'http://dantri.com.vn',
@@ -19,9 +19,10 @@ class Rule
       '<div class="fl wid470"' => '<div class="fl"'
     },
     'bongdaplus.vn' => {
+      '(?<=("|\'))/(?=(JScripts|Uploaded))' => 'http://bongdaplus.vn/',
       '(?<==("|\'))\s*/' => 'http://bongdaplus.vn/',
       '(?<=href=("|\'))http://(?!bongdaplus.vn/(App_Themes/Default|favicon.ico))' => 'http://localhost:3000/sites?url=http://',
-      '<div id="toolbar".*(?=<div class="foldwrap")' => '<div class="foldwrap">',
+      '<div id="top-adv".*(?=<div class="foldwrap")' => '<div class="foldwrap">',
       '<table id="ctl00_Footer_Embedded_Ads_Script".*</table>' => '',
       '<div class="sidebar grid_8 omega">.*</script>' => '</div></div>',
       '<div class="sidebar grid_8 omega">.*(?=<div id="footer-ads")' => '</div></div>',
@@ -39,7 +40,6 @@ class Rule
     content.gsub!(*STRIP_BEFORE_TAGS)
     content.gsub!(*STRIP_AFTER_TAGS)
     content.gsub!(*STRIP_CONTROLS)
-    content.gsub!(*REMOVE_SCRIPTS)
 
     hostname = url[/http[s]*:\/\/(www.)*[\w\-.]+/][/(?<=\/\/)[\w\-\.]+/]
     CHANGE_ELEMENTS[hostname].each do |k, v|
