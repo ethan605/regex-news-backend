@@ -5,24 +5,22 @@ e-News reader system using Regular Expression
 
 Added sites:
 
-- http://dantri.com.vn [99%]
-- http://bongdaplus.vn [99%]
-- http://vnexpress.net [99%]
+- http://24h.com.vn       [80%]
+- http://bongdaplus.vn    [99%]
+- http://dantri.com.vn    [99%]
+- http://vnexpress.net    [99%]
 
 Pending sites:
 
-- http://tuoitre.com.vn
-- http://vietnamnet.vn
-- http://vtc.vn
+- http://dailyinfo.vn
 - http://genk.vn
 - http://kenh14.vn
-- http://zing.vn/news
+- http://laodong.com.vn
+- http://news.zing.vn
+- http://ngoisao.net
 - http://tienphongonline.com.vn
-- http://www.ngoisao.net
-- http://dailyinfo.vn
-- http://www.laodong.com.vn
-- http://www.24h.com.vn
-- http://www.nhandan.org.vn
-- http://www.vnagency.com.vn
 - http://tuanvietnam.net
+- http://tuoitre.com.vn
+- http://vietnamnet.vn
 - http://vn.news.yahoo.com
+- http://vtc.vn
