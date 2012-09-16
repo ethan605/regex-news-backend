@@ -1,1 +1,11 @@
-<%= @content.html_safe %>
+<% if @content %>
+  <%= @content.html_safe %>
+<% else %>
+  <p>Domain not processed</p>
+  <h1>Processed domains</h1>
+  <% @sites.each do |site| %>
+    <li>
+      <a href="/sites?url=http://<%= site %>"><%= site %></a>
+    </li>
+  <% end %>
+<% end %>
