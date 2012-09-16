@@ -21,6 +21,7 @@ class Rule
       '<div id="linksiteEH".*(?=</div><div id="content")' => '',
       '<div class="content-left fl".*(?=</body>)' => '</div></div></div>',
       '(?<=<div class="content-center fl")' => ' style="width: 990px"',
+      '(?<=<div class="folder-header")' => ' style="width: 990px"'
     },
     'dantri.com.vn' => {
       '<script[^<]*</script>' => '',
