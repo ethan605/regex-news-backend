@@ -73,6 +73,23 @@ module Rule::RegEx
       '<div class="adzone4 ads_by_admicro".*?</div></div>' => '',
       '<div (id|class)="(?!homepageboxlast)[^<]*</div>' => ''
     },
+    'news.zing.vn' => {
+      '<script.*?</script>' => '',
+      '(?<=href=["\'])/' => '/sites?url=http://news.zing.vn/',
+      '(?<=href=["\'])http://(?=news.zing.vn)' => '/sites?url=http://',
+      '<div class="zingtop".*(?=<div class="zingcomponent")' => '',
+      '<p class="local_timer".*?</p>' => '',
+      '<div class="topnews_slideshow" id="topnew_slideshow_2".*?(?=<ul)' => '</div>',
+      '<div class="sidecol_blk02 blk_topphoto".*?(?=<div class="sidecol_blk04 blk_topicnews")' => '',
+      '<div class="sidecol_blk03 hotline_box".*?(?=<div class="sidecol_blk04 blk_topicnews")' => '',
+      '<div class="newsfilter".*(?=<div class="znews_rightcol")' => '</div>',
+      '<p class="followZinglive".*?</p>' => '',
+      '<div class="share_link".*<!-- begin: Footer -->' => '</div></div></div>',
+      '<iframe.*?</iframe>' => '',
+      '<div class="znews_footer".*(?=</body>)' => '',
+      '(?<=<!-- begin: left column --><div class="znews_leftcol")' => ' style="width: 980px"',
+      '(?<=<div class="newsdetail_wrapper")' => ' style="width: 815px"'
+    },
     'ngoisao.net' => {
       '<script.*?</script>' => '',
       '(?<=href=["\'])http://(?=ngoisao.net)' => '/sites?url=http://',
