@@ -58,6 +58,21 @@ module Rule::RegEx
       '<div itemscope itemtype=.*</script>' => '',
       '<div class="fl wid470"' => '<div class="fl"'
     },
+    'kenh14.vn' => {
+      '<script.*?</script>' => '',
+      '(?<==["\'])/' => '/sites?url=http://kenh14.vn/',
+      '<div class="scrolltopwrapper clearfix".*(?=<div class="menuwrapper")' => '',
+      '<div class="subheader".*(?=<div class="submenu_container")' => '',
+      '<div class="subheader".*?</a>' => '',
+      '<div class="details_top_like".*(?=<div class="author")' => '',
+      '<div class="post-share".*(?=<div id="vcm_tagsNews")' => '',
+      '<div class="postsep".*(?=<div class="relatebox")' => '',
+      '<div class="adzone6".*(?=</div></div></div></form>)' => '',
+      '<div class="dateselector".*?</div></div>' => '',
+      '<div id="TieuDiemPhai".*(?=<div class="maincontent clearfix")' => '',
+      '<div class="adzone4 ads_by_admicro".*?</div></div>' => '',
+      '<div (id|class)="(?!homepageboxlast)[^<]*</div>' => ''
+    },
     'vnexpress.net' => {
       '\/\/<!\[CDATA\[.*?\/\/]]>' => '',
       '<script.*?</script>' => '',

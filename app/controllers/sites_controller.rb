@@ -7,6 +7,7 @@ class SitesController < ApplicationController
       Rule.each do |r|
         @sites << r.domain
       end
+      @sites.reverse!
     end
 
     respond_to do |format|
