@@ -17,7 +17,7 @@ class Rule
  
   def self.apply_rules(url)
     content = Mechanize.new.get(url).content
-    
+
     content.gsub!(*STRIP_BETWEEN_TAGS)
     content.gsub!(*STRIP_BEFORE_TAGS)
     content.gsub!(*STRIP_AFTER_TAGS)
