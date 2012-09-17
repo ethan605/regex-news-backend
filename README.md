@@ -11,6 +11,7 @@ Added sites:
 - http://kenh14.vn        [99%]
 - http://ngoisao.net      [99%]
 - http://tiin.vn          [99%]
+- http://vietnamnet.vn    [99%]
 - http://vnexpress.net    [99%]
 
 Pending sites:
@@ -21,6 +22,5 @@ Pending sites:
 - http://tienphongonline.com.vn
 - http://tuanvietnam.net
 - http://tuoitre.com.vn
-- http://vietnamnet.vn
 - http://vn.news.yahoo.com
 - http://vtc.vn
