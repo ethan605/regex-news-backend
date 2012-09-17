@@ -9,6 +9,7 @@ Added sites:
 - http://bongdaplus.vn    [99%]
 - http://dantri.com.vn    [99%]
 - http://kenh14.vn        [99%]
+- http://news.zing.vn     [99%]
 - http://ngoisao.net      [99%]
 - http://tiin.vn          [99%]
 - http://vietnamnet.vn    [99%]
@@ -18,7 +19,6 @@ Pending sites:
 
 - http://genk.vn
 - http://laodong.com.vn
-- http://news.zing.vn
 - http://tienphongonline.com.vn
 - http://tuanvietnam.net
 - http://tuoitre.com.vn
