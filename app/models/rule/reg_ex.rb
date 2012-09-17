@@ -46,9 +46,9 @@ module Rule::RegEx
     },
     'dantri.com.vn' => {
       '<script.*?</script>' => '',
-      '(?<=href=["\'])/(?!App_Themes/Default/Images/favico.ico)' => '/sites?url=http://dantri.com.vn/',
-      '(?<=<link rel="Shortcut Icon" href=")/' => 'http://dantri.com.vn/',
       '(?<=href=["\'])http://(?=dantri.com.vn)' => '/sites?url=http://',
+      '(?<=<link rel="Shortcut Icon" href=")/' => 'http://dantri.com.vn/',
+      '(?<=href=["\'])/' => '/sites?url=http://dantri.com.vn/',
       '<div class="header".*(?=<div class="nav-wrap">)' => '',
       '<div class="footer box19".*(?=</form>)' => '',
       '<OBJECT.*?</OBJECT>' => '',
