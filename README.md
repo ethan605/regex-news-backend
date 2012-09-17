@@ -3,6 +3,8 @@ regex-news-backend
 
 e-News reader system using Regular Expression
 
+The system uses HMAC Method to secure APIs
+
 Added sites:
 
 - http://24h.com.vn       [90%]

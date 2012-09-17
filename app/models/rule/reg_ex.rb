@@ -25,6 +25,7 @@ module Rule::RegEx
       '<div class="footer".*(?=</body>)' => '</div>',
       '(?<=<div class="phantrang">).*?(?=</div>)' => '',
       '<div class="theoNgay".*?</div>' => '',
+      '<div class="divChonNgay".*?</form></div>' => ''
     },
     'bongdaplus.vn' => {
       '(?<==["\'])/(?=(JScripts|Uploaded))' => 'http://bongdaplus.vn/',
