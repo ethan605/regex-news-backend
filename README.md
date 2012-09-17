@@ -10,6 +10,7 @@ Added sites:
 - http://dantri.com.vn    [99%]
 - http://kenh14.vn        [99%]
 - http://ngoisao.net      [99%]
+- http://tiin.vn          [99%]
 - http://vnexpress.net    [99%]
 
 Pending sites:
@@ -18,7 +19,6 @@ Pending sites:
 - http://laodong.com.vn
 - http://news.zing.vn
 - http://tienphongonline.com.vn
-- http://tiin.vn
 - http://tuanvietnam.net
 - http://tuoitre.com.vn
 - http://vietnamnet.vn

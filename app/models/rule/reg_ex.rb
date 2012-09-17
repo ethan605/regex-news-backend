@@ -90,6 +90,19 @@ module Rule::RegEx
       '<div class="midAd".*(?=<div class="fl httw")' => '',
       '<div class="ad-right-home".*?(?=<div class="fl [c]*nop")' => ''
     },
+    'tiin.vn' => {
+      '<script.*?</script>' => '',
+      '(?<=src=["|\'])/(?=theme)' => 'http://tiin.vn/',
+      '(?<=href=["|\'])/(?!favicon.ico)' => '/sites?url=http://tiin.vn/',
+      '/favicon.ico' => 'http://tiin.vn/favicon.ico',
+      '(?<=url)\([^\)]*' => '(',
+      '<div id="top-header".*(?=<div id="menu-container")' => '',
+      'id="header"' => '',
+      '<div class="fb-like".*(?=<p id="content-header")' => '',
+      '<div class="emailprint".*?</div>' => '',
+      '<div id="other".*(?=<div id="body-content")' => '',
+      '<div id="footer-container".*(?=</body>)' => '</div></div>'
+     },
     'vnexpress.net' => {
       '\/\/<!\[CDATA\[.*?\/\/]]>' => '',
       '<script.*?</script>' => '',
