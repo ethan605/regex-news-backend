@@ -12,7 +12,7 @@ Added sites:
 - http://news.zing.vn     [99%]
 - http://ngoisao.net      [99%]
 - http://tiin.vn          [99%]
-- http://tuoitre.vn       [20%]
+- http://tuoitre.vn       [90%]
 - http://vietnamnet.vn    [99%]
 - http://vnexpress.net    [99%]
 
