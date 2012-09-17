@@ -119,7 +119,15 @@ module Rule::RegEx
       '<div class="emailprint".*?</div>' => '',
       '<div id="other".*(?=<div id="body-content")' => '',
       '<div id="footer-container".*(?=</body>)' => '</div></div>'
-     },
+    },
+    'tuoitre.vn' => {
+      '<script.*?</script>' => '',
+      '(?<=href=["\'])(?=(App_Themes|Images|Master))' => 'http://tuoitre.vn/',
+      '(?<=url\()..(?=/Images)' => 'http://tuoitre.vn/',
+      '<div class="itemtop".*(?=<div id="header")' => '',
+      '<div class="logo".*?</div>' => '',
+      '(?<=<div id="header")' => ' style="background-image:none"'
+    },
     'vietnamnet.vn' => {
       '(?<=href=["\'])/' => '/sites?url=http://vietnamnet.vn/',
       '<div class="topPage".*(?=<div class="menuTopBox")' => '',

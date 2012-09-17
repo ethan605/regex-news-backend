@@ -12,6 +12,7 @@ Added sites:
 - http://news.zing.vn     [99%]
 - http://ngoisao.net      [99%]
 - http://tiin.vn          [99%]
+- http://tuoitre.vn       [20%]
 - http://vietnamnet.vn    [99%]
 - http://vnexpress.net    [99%]
 
@@ -21,6 +22,5 @@ Pending sites:
 - http://laodong.com.vn
 - http://tienphongonline.com.vn
 - http://tuanvietnam.net
-- http://tuoitre.com.vn
 - http://vn.news.yahoo.com
 - http://vtc.vn
