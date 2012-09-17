@@ -8,16 +8,23 @@ module Rule::RegEx
   REMOVE_INPUTS       = [/<input[^>]*>/m, '']
   CHANGE_ELEMENTS     = {
     '24h.com.vn' => {
-      '<script[^<]*</script>' => '',
+      '\/\/<!\[CDATA\[.*?\/\/\]\]>' => '',
+      '<script.*?</script>' => '',
       'style="background:url[^"]*"' => '',
       'favicon.gif' => 'favicon.ico',
       '(?<==["|\'])/(?=(js|css|favicon))' => 'http://www.24h.com.vn/',
       '(?<=href=["|\'])/' => '/sites?url=http://24h.com.vn/',
+      '(?<==["|\'])http://www.24h.com.vn/(?!(js|css|favicon))' => '/sites?url=http://www.24h.com.vn/',
       '<div class="header(-inside)*".*(?=<table width="1004")' => '',
-      '<div class="shareFB-green".*(?=<div class="baiviet-tags")' => '',
+      '<div class="header".*(?=<div class="content")' => '',
+      '<ul id="submenu.*?</ul>' => '',
+      '<td id="cRight".*(?=</tr>)' => '',
+      '<div class="shareFB-green".*(?=<div (class="baiviet-tags"|id="relate_news"))' => '',
       '<div class="div-banner300250".*</td>' => '',
-      '<ul id="submenu.*(?=<div id="tin_tieu_diem")' => '',
-      '<div class="footer".*(?=</body>)' => '</div>'
+      '<div id="comment_content".*(?=<div id="relate_news")' => '',
+      '<div class="footer".*(?=</body>)' => '</div>',
+      '(?<=<div class="phantrang">).*?(?=</div>)' => '',
+      '<div class="theoNgay".*?</div>' => '',
     },
     'bongdaplus.vn' => {
       '(?<==["\'])/(?=(JScripts|Uploaded))' => 'http://bongdaplus.vn/',
@@ -35,7 +42,7 @@ module Rule::RegEx
       'grid_16' => 'grid_24'
     },
     'dantri.com.vn' => {
-      '<script[^<]*</script>' => '',
+      '<script.*?</script>' => '',
       '(?<=href=["\'])/(?!App_Themes/Default/Images/favico.ico)' => '/sites?url=http://dantri.com.vn/',
       '(?<=<link rel="Shortcut Icon" href=")/' => 'http://dantri.com.vn/',
       '<div class="header".*(?=<div class="nav-wrap">)' => '',
@@ -46,7 +53,8 @@ module Rule::RegEx
       '<div class="fl wid470"' => '<div class="fl"'
     },
     'vnexpress.net' => {
-      '<script[^<]*</script>' => '',
+      '\/\/<!\[CDATA\[.*?\/\/]]>' => '',
+      '<script.*?</script>' => '',
       '(?<=href=["\'])/(?=([Ll]ibrary|[Rr]esource|[Ii]mages|[Ff]iles))' => 'http://vnexpress.net/',
       '(?<=src=["\'])/(?=([Ll]ibrary|[Rr]esource|[Ii]mages|[Ff]iles))' => 'http://vnexpress.net/',
       '(?<=href=["\'])/' => '/sites?url=http://vnexpress.net/',

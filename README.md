@@ -5,7 +5,7 @@ e-News reader system using Regular Expression
 
 Added sites:
 
-- http://24h.com.vn       [80%]
+- http://24h.com.vn       [90%]
 - http://bongdaplus.vn    [99%]
 - http://dantri.com.vn    [99%]
 - http://vnexpress.net    [99%]
