@@ -73,6 +73,23 @@ module Rule::RegEx
       '<div class="adzone4 ads_by_admicro".*?</div></div>' => '',
       '<div (id|class)="(?!homepageboxlast)[^<]*</div>' => ''
     },
+    'ngoisao.net' => {
+      '<script.*?</script>' => '',
+      '(?<=href=["|\'])http://(?=ngoisao.net)' => '/sites?url=http://',
+      '(?<=href=["|\'])/(?=([Rr]esource|[Ss]ervice|[Ll]ibrary|[Ii]mages|[Ff]iles))' => 'http://ngoisao.net/',
+      '(?<=src=["|\'])/(?=([Rr]esource|[Ss]ervice|[Ll]ibrary|[Ii]mages|[Ff]iles))' => 'http://ngoisao.net/',
+      '(?<=href=["|\'])/' => '/sites?url=http://ngoisao.net/',
+      '(?<=url\()/[Ii]mages/[^\)]*' => '',
+      '<div id="taskbar_top".*(?=<div id="wrapper-container")' => '',
+      '<div id="header".*(?=<div id="content")' => '',
+      '<div id="footer".*(?=</body>)' => '</div></div></div>',
+      '<div class="topDetail".*?(?=<H1)' => '',
+      '<div class="detailNS".*(?=<div class="relateNewsDetail")' => '',
+      '<div class="adv".*(?=<div class="Div_OtherNews")' => '',
+      '<div class="tnhome".*(?=<div class=["\']backStage)' => '',
+      '<div class="midAd".*(?=<div class="fl httw")' => '',
+      '<div class="ad-right-home".*?(?=<div class="fl [c]*nop")' => ''
+    },
     'vnexpress.net' => {
       '\/\/<!\[CDATA\[.*?\/\/]]>' => '',
       '<script.*?</script>' => '',
