@@ -35,11 +35,14 @@ module Rule::RegEx
       '<div class="sidebar grid_8 omega">.*</script>' => '</div></div>',
       '<div class="sidebar grid_8 omega">.*(?=<div id="footer-ads")' => '</div></div>',
       '<div id="most-read-stories".*(?=<img)' => '',
-      '(?<=<div class="story-body">)<object.*</object>' => '',
+      '<object.*?</object>' => '',
+      '<p class="like".*?</a></p>' => '',
+      '<div class="social clearfix".*?</ul></div>' => '',
       '<div class="starworld clearfix".*(?=<div class="mainbox clearfix ads">)' => '',
       '<div class="story-feature grid_7 alpha" id="survey".*<p>&nbsp;</p><p>&nbsp;</p><br />' => '',
       '<div id="footer".*(?=<img)' => '',
-      'grid_16' => 'grid_24'
+      '<div class="ads".*?</table></div>' => '',
+      'grid_16' => 'grid_24',
     },
     'dantri.com.vn' => {
       '<script.*?</script>' => '',

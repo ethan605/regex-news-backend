@@ -25,17 +25,17 @@ class Rule
     content.gsub!(*REMOVE_INPUTS)
 
     domain = url[/http[s]*:\/\/(www.)*[\w\-.]+/][/(?<=\/\/)[\w\-\.]+/]
-    # rule = Rule.domain(domain).first
-
-    # return nil unless rule
-
-    # rule.rules.each do |from, to|
-    #   content.gsub!(/#{from}/m, to)
-    # end
-
-    CHANGE_ELEMENTS[domain].each do |from, to|
+    
+    rule = Rule.domain(domain).first
+    
+    return nil unless rule
+    rule.rules.each do |from, to|
       content.gsub!(/#{from}/m, to)
     end
+
+    # CHANGE_ELEMENTS[domain].each do |from, to|
+    #   content.gsub!(/#{from}/m, to)
+    # end
 
     return content
   end
