@@ -1,7 +1,8 @@
-regex-news-backend
-==================
+# regex-news-backend
 
 e-News reader system using Regular Expression
+
+## APIs
 
 The system uses HMAC method to secure APIs. A request should include:
 
@@ -12,14 +13,15 @@ The system uses HMAC method to secure APIs. A request should include:
 HMAC of entire request is calculated using private key (which is exclusively
 shared between server & client) and message with format:
 
-/request/path|request_method|public_key|request|params
+<code>/request/path|request-method|public-key|request|params</code>
 
-For example, with request:
+<em>For example, with request:</em>
 
-- path: "/sites/rules"
-- method: "GET",
-- public key: "abcdef123456"
+- path: <code>/sites/rules</code>
+- method: <code>GET</code>
+- public key: <code>abcdef123456</code>
 - params:
+<code>
 {
   "id" => "123456",
   "email" => [
@@ -31,10 +33,12 @@ For example, with request:
     "word" => "456"
   }
 }
+</code>
 
-We have message: "/sites/rules|GET|abcdef123456|id|123456|email|test@domain.com|test2@domain.com|obj|pass|123|word|456"
+We have message: <code>"/sites/rules|GET|abcdef123456|id|123456|email|test@domain.com|test2@domain.com|obj|pass|123|word|456"</code>
 
-Added sites:
+## Progress
+#### Added sites:
 
 - http://24h.com.vn       [90%]
 - http://bongdaplus.vn    [99%]
@@ -47,7 +51,7 @@ Added sites:
 - http://vietnamnet.vn    [99%]
 - http://vnexpress.net    [99%]
 
-Pending sites:
+#### Pending sites:
 
 - http://genk.vn
 - http://laodong.com.vn
