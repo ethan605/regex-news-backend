@@ -1,8 +1,10 @@
 class SitesController < ApplicationController
   def index
+    url_pattern = /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$/ix
+
     @content = nil
     begin
-      @content = Rule.apply_rules(params[:url]) if params[:url]
+      @content = Rule.apply_rules(params[:url]) if params[:url] && params[:url] =~ url_pattern
     rescue SocketError => e
       puts "#{e}"
       @content = nil
@@ -30,7 +32,8 @@ class SitesController < ApplicationController
     if auth
       digest = OpenSSL::Digest::Digest.new('sha256')
       private_key = auth.private_key
-      message = [request.path, request.method, public_key.to_s].join('|')
+      message = [request.path, request.method, params[:key], params[:params] ? params[:params] : ""]
+      message = Auth.convert_params(message)
       hmac = OpenSSL::HMAC.hexdigest(digest, private_key.to_s, message)
 
       status = 1 unless params[:hmac] && hmac == params[:hmac]

@@ -46,11 +46,11 @@ class Rule
     return content
   end
 
-  def self.test
+  def self.sha
     digest = OpenSSL::Digest::Digest.new('sha256')
     public_key = Digest::SHA2.new(256) << 'regex-news-backend'
-    message = ['/sites/rules', 'GET', public_key.to_s].join('|')
     private_key = Digest::SHA2.new(384) << 'regex-news-backend'
-    hmac = OpenSSL::HMAC.hexdigest(digest, private_key.to_s, message)
+
+    hmac = OpenSSL::HMAC.hexdigest(digest, private_key.to_s, Auth.convert_params)
   end
 end
