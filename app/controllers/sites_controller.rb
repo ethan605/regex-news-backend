@@ -2,11 +2,9 @@ class SitesController < ApplicationController
   def index
     url_pattern = /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$/ix
 
-    @content = nil
-    begin
-      @content = Rule.apply_rules(params[:url]) if params[:url] && params[:url] =~ url_pattern
-    rescue SocketError => e
-      puts "#{e}"
+    if params[:url] && params[:url] =~ url_pattern
+      @content = Rule.apply_rules(params[:url])
+    else
       @content = nil
     end
 
