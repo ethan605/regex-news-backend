@@ -4,7 +4,7 @@ e-News reader system using Regular Expression
 
 ## APIs
 
-The system uses HMAC method to secure APIs. A request should include:
+The system uses [HMAC](http://en.wikipedia.org/wiki/Hash-based_message_authentication_code) method to secure APIs. A request should include:
 
 - Public key
 - Request params
@@ -35,21 +35,53 @@ shared between server & client) and message with format:
 }
 </code>
 
-We have message: <code>"/sites/rules|GET|abcdef123456|id|123456|email|test@domain.com|test2@domain.com|obj|pass|123|word|456"</code>
+We have message: <code>/sites/rules|GET|abcdef123456|id|123456|email|test@domain.com|test2@domain.com|obj|pass|123|word|456</code>
 
 ## Progress
 #### Added sites:
 
-- http://24h.com.vn       [90%]
-- http://bongdaplus.vn    [99%]
-- http://dantri.com.vn    [99%]
-- http://kenh14.vn        [99%]
-- http://news.zing.vn     [99%]
-- http://ngoisao.net      [99%]
-- http://tiin.vn          [99%]
-- http://tuoitre.vn       [90%]
-- http://vietnamnet.vn    [99%]
-- http://vnexpress.net    [99%]
+<table>
+  <tr>
+    <td>http://24h.com.vn</td>
+    <td>[90%]</td>
+  </tr>
+  <tr>
+    <td>http://bongdaplus.vn</td>
+    <td>[99%]</td>
+  </tr>
+  <tr>
+    <td>http://dantri.com.vn</td>
+    <td>[99%]</td>
+  </tr>
+  <tr>
+    <td>http://bongdaplus.vn</td>
+    <td>[99%]</td>
+  </tr>
+  <tr>
+    <td>http://kenh14.vn</td>
+    <td>[99%]</td>
+  </tr>
+  <tr>
+    <td>http://news.zing.vn.vn</td>
+    <td>[99%]</td>
+  </tr>
+  <tr>
+    <td>http://ngoisao.net</td>
+    <td>[99%]</td>
+  </tr>
+  <tr>
+    <td>http://tuoitre.vn</td>
+    <td>[90%]</td>
+  </tr>
+  <tr>
+    <td>http://vietnamnet.vn</td>
+    <td>[99%]</td>
+  </tr>
+  <tr>
+    <td>http://vnexpress.net</td>
+    <td>[99%]</td>
+  </tr>
+</table>
 
 #### Pending sites:
 
