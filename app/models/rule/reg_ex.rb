@@ -158,12 +158,18 @@ module Rule::RegEx
       '<div class="columnsPageCenterRight clearfix".*?<!--\[bottomPage\]-->' => '</div></div></div></div>',
       '(?<=<div class="columnsPageLeft")' => ' style="width: 1000px"'
     },
+    'vn.news.yahoo.com' => {
+      '<script.*?</script>' => '',
+      '<div id="header".*?(?=<div class="yom-mod yom-nav")' => '',
+      '<footer>.*?</footer>' => ''
+    },
     'vnexpress.net' => {
-      '\/\/<!\[CDATA\[.*?\/\/]]>' => '',
+      '\/\/<!\[CDATA\[.*?\/\/\]\]>' => '',
       '<script.*?</script>' => '',
       '(?<=href=["\'])/(?=([Ll]ibrary|[Rr]esource|[Ii]mages|[Ff]iles))' => 'http://vnexpress.net/',
       '(?<=src=["\'])/(?=([Ll]ibrary|[Rr]esource|[Ii]mages|[Ff]iles))' => 'http://vnexpress.net/',
       '(?<=href=["\'])/' => '/sites?url=http://vnexpress.net/',
+      '(?<=href=["\'])http://(?=vnexpress.net/(?!([Ll]ibrary|[Rr]esource|[Ii]mages|[Ff]iles)))' => '/sites?url=http://',
       '<div class="fpr2".*(?=<div id="menu")' => '',
       '<div id="mn-search".*(?=<div class="menu">)' => '</div>',
       '<div id="footer".*(?=</body>)' => '</div></div>',
