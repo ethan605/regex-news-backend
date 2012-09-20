@@ -1,4 +1,4 @@
-module Rule::RegEx
+module Rule::ArticleRule
   extend ActiveSupport::Concern
 
   STRIP_BETWEEN_TAGS  = [/(?<=>)[\s\n\r\t]*(?=<)/m, '']
