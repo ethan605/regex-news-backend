@@ -1,3 +1,5 @@
+require 'open-uri'
+
 class Rule::Crawler
   def self.vne
     Article.delete_all
@@ -5,75 +7,97 @@ class Rule::Crawler
     Site.delete_all
 
     domain = 'vnexpress.net'
-    agent = Mechanize.new
-    page = Nokogiri::HTML(agent.get("http://#{domain}").content)
+    page = Nokogiri::HTML(open("http://#{domain}"))
 
     # Init site
     site = Site.new(url: "http://#{domain}", title: domain)
     site.save!
 
-    # Init category - Top news
-    category = Category.new(title: "[#{domain}] Top news")
-    category.save!
-    site.tops << category
-    site.save!
-
-    # Top news
-    top_news = page.css('#top4 .hotnews-detail p')
-    url = "http://#{domain}" + top_news[0].css('a')[0][:href]
-    attributes = {
-      title: top_news[0].css('a')[1].text,
-      image: "http://#{domain}" + top_news[0].css('img')[0][:src],
-      spoiler: top_news[1].text.gsub(/>.*/, '')
-    }
+    category = site.update_category('top', title: "[#{domain}] Top news")
 
     # Top news - main article
-    article = Article.find_or_initialize_by(url: url)
-    article.update_attributes!(attributes)
-    category.mains << article
-    category.save!
+    news = page.css('#top4 .hotnews-detail')
+    news.each do |content|
+      attributes = {
+        url: ensure_url(content.css('a')[0][:href], domain),
+        title: content.css('a')[1].text,
+        image: ensure_url(content.css('img')[0][:src], domain),
+        spoiler: content.css('p')[1].text.gsub(/>.*/, '')
+      }
+      category.update_topic('main', attributes)
+    end
 
     # Top news - sub articles
-    top_news = page.css('#topnews .t3-content.fl')
-    top_news.each do |content|
-      url = "http://#{domain}" + content.css('p a')[0][:href]
+    news = page.css('#topnews .t3-content')
+    news.each do |content|
       attributes = {
-        title: content.css('p a')[1].text,
-        image: "http://#{domain}" + content.css('p img')[0][:src]
+        url: ensure_url(content.css('a')[0][:href], domain),
+        title: content.css('a')[1].text,
+        image: ensure_url(content.css('img')[0][:src], domain)
       }
-
-      article = Article.find_or_initialize_by(url: url)
-      article.update_attributes!(attributes)
-      category.subs << article
-      category.save!
+      category.update_topic('sub', attributes)
     end
 
     # Top news - other articles
-    top_news = page.css('#toplist .toplist-content2 li a')
-    top_news.each do |content|
-      url = "http://#{domain}" + content[:href]
+    news = page.css('#toplist .toplist-content2 li a')
+    news.each do |content|
       attributes = {
+        url: ensure_url(content[:href], domain),
         title: content.text
       }
-
-      article = Article.find_or_initialize_by(url: url)
-      article.update_attributes!(attributes)
-      category.others << article
-      category.save!
+      category.update_topic('other', attributes)
     end
 
-    # Content categories
+    ## Content categories
     contents = page.css('#content .folder')
     contents.delete(contents.last)
     contents.each do |content|
-      url = "http://#{domain}" + content.css('.folder-active a')[0][:href]
-      puts "#{url}"
       attributes = {
-        title: content.css('.folder-active a')[0].text
+        url: ensure_url(content.css('[class^="folder-active"] a')[0][:href], domain),
+        title: content.css('[class^="folder-active"] a')[0].text
       }
+      category = site.update_category('content', attributes)
 
-      category = Category.find_or_initialize_by(url: url)
-      category.update_attributes!(attributes)
+      # Content category - Main article
+      news = content.css('.folder-topnews')[0]
+      attributes = {
+        url: ensure_url(news.css('a')[0][:href], domain),
+        title: news.css('a')[1].text,
+        image: ensure_url(news.css('img')[0][:src], domain),
+        spoiler: news.css('p')[1].text.gsub(/>.*/,'')
+      }
+      category.update_topic('main', attributes)
+
+      # Content category - Sub articles
+      news = content.css('.folder-othernews div[class^="other-folder"]')[0]
+      if news
+        attributes = {
+          url: ensure_url(news.css('a')[0][:href], domain),
+          title: news.css('a')[1].text,
+          image: ensure_url(news.css('img')[0][:src], domain)
+        }
+
+        category.update_topic('sub', attributes)
+      end
+
+      # Content category - Other articles
+      news = content.css('.folder-othernews div[class^="fl"] ul li a')
+      news.each do |content|
+        attributes = {
+          url: ensure_url(content[:href], domain),
+          title: news.text
+        }
+        category.update_topic('other', attributes)
+      end
+    end
+  end
+
+  def self.ensure_url(url, domain)
+    url_pattern = /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$/ix
+    unless url =~ url_pattern
+      return "http://#{domain}" + url
+    else
+      return url
     end
   end
 end

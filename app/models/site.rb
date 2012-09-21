@@ -13,33 +13,40 @@ class Site
   validates_uniqueness_of :update_time
 
   json_fields \
-    update_time: { },
+    update_time: { definition: :update_time_rfc },
     title: { },
     url: { },
     tops: { definition: :top_news },
     contents: { definition: :content_news }
 
-  def self.init
-    Article.delete_all
-    Category.delete_all
-    Site.delete_all
-    9.times do |i|
-      a = Article.new(url: "url ##{i}", title: "title ##{i}")
-      a.save
-    end
-    (0..2).each do |i|
-      c = Category.new
-      c.save
-      c.mains << Article.all.at(i*3)
-      c.subs << Article.all.at(i*3+1)
-      c.contents << Article.all.at(i*3+2)
-      c.save
-    end
-    s = Site.new
-    s.save
-    s.tops << Category.all.at(0)
-    s.contents << Category.all.at(1)
-    s.contents << Category.all.at(2)
-    s.save
+  def update_category(name, attributes)
+    category = Category.find_or_initialize_by(url: attributes[:url])
+    category.update_attributes!(attributes)
+    self.send("update_#{name}", category)
+    return category
   end
+
+  def update_top(category)
+    self.tops << category
+    self.save!
+  end
+
+  def update_content(category)
+    self.contents << category
+    self.save!
+  end
+
+  def update_time_rfc
+    return self.update_time.rfc822
+  end
+
+  def top_news
+    return tops.as_json
+  end
+
+  def content_news
+    return contents.as_json
+  end
+
+  private :update_top, :update_content, :update_time_rfc, :top_news, :content_news
 end

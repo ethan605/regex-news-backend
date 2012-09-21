@@ -50,4 +50,10 @@ class SitesController < ApplicationController
       render json: { status: status, message: messages[status] }
     end
   end
+
+  def home
+    sites = Site.all
+
+    render json: sites
+  end
 end

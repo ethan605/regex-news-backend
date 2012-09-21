@@ -19,15 +19,38 @@ class Category
     subs: { definition: :sub_news },
     others: { definition: :other_news }
 
+  def update_topic(name, attributes)
+    article = Article.find_or_initialize_by(url: attributes[:url])
+    article.update_attributes!(attributes)
+    self.send("update_#{name}", article)
+  end
+
+  def update_main(article)
+    self.mains << article
+    self.save!
+  end
+
+  def update_sub(article)
+    self.subs << article
+    self.save!
+  end
+
+  def update_other(article)
+    self.others << article
+    self.save!
+  end
+
   def main_news
-    return main.as_json
+    return mains.as_json
   end
 
   def sub_news
-    return sub.as_json
+    return subs.as_json
   end
 
   def other_news
-    return other.as_json
+    return others.as_json
   end
+
+  private :main_news, :sub_news, :other_news, :update_main, :update_sub, :update_other
 end
