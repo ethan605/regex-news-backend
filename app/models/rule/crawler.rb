@@ -1,7 +1,7 @@
 require 'open-uri'
 
 class Rule::Crawler
-  def self.vne
+  def self.vnexpress
     Article.delete_all
     Category.delete_all
     Site.delete_all
@@ -30,10 +30,19 @@ class Rule::Crawler
     # Top news - sub articles
     news = page.css('#topnews .t3-content')
     news.each do |content|
+    #   attributes = {
+    #     url: ensure_url(content.css('a')[0][:href], domain),
+    #     title: content.css('a')[1].text,
+    #     image: ensure_url(content.css('img')[0][:src], domain)
+    #   }
+      content = content.to_html
+      content.gsub!(*Rule::STRIP_BETWEEN_TAGS)
+      content.gsub!(*Rule::STRIP_BEFORE_TAGS)
+      content.gsub!(*Rule::STRIP_AFTER_TAGS)
       attributes = {
-        url: ensure_url(content.css('a')[0][:href], domain),
-        title: content.css('a')[1].text,
-        image: ensure_url(content.css('img')[0][:src], domain)
+        url: ensure_url(content[/(?<=<a href=")[^>"]*/], domain),
+        title: content[/(?<=>)[\w[^<]]+/],
+        image: ensure_url(content[/(?<=src=")[^>"]*/], domain)
       }
       category.update_topic('sub', attributes)
     end
@@ -59,14 +68,16 @@ class Rule::Crawler
       category = site.update_category('content', attributes)
 
       # Content category - Main article
-      news = content.css('.folder-topnews')[0]
-      attributes = {
-        url: ensure_url(news.css('a')[0][:href], domain),
-        title: news.css('a')[1].text,
-        image: ensure_url(news.css('img')[0][:src], domain),
-        spoiler: news.css('p')[1].text.gsub(/>.*/,'')
-      }
-      category.update_topic('main', attributes)
+      news = content.css('.folder-topnews')
+      news.each do |content|
+        attributes = {
+          url: ensure_url(content.css('a')[0][:href], domain),
+          title: content.css('a')[1].text,
+          image: ensure_url(content.css('img')[0][:src], domain),
+          spoiler: content.css('p')[1].text.gsub(/>.*/,'')
+        }
+        category.update_topic('main', attributes)
+      end
 
       # Content category - Sub articles
       news = content.css('.folder-othernews div[class^="other-folder"]')[0]
