@@ -1,7 +1,7 @@
 class Rule
   include Mongoid::Document
   include Mongoid::CachedJson
-  include Rule::ArticleRule
+  include Rule::ArticleRuleLite
 
   field :domain
   field :rules
