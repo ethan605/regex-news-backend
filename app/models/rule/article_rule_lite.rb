@@ -36,35 +36,17 @@ module Rule::ArticleRuleLite
     },
     'kenh14.vn' => {
       '<script.*?</script>' => '',
-      '(?<==["\'])/' => '/sites?url=http://kenh14.vn/',
-      '<div class="scrolltopwrapper clearfix".*(?=<div class="menuwrapper")' => '',
-      '<div class="subheader".*(?=<div class="submenu_container")' => '',
-      '<div class="subheader".*?</a>' => '',
-      '<div class="details_top_like".*(?=<div class="author")' => '',
-      '<div class="post-share".*(?=<div id="vcm_tagsNews")' => '',
-      '<div class="postsep".*(?=<div class="relatebox")' => '',
-      '<div class="adzone6".*(?=</div></div></div></form>)' => '',
-      '<div class="dateselector".*?</div></div>' => '',
-      '<div id="TieuDiemPhai".*(?=<div class="maincontent clearfix")' => '',
-      '<div class="adzone4 ads_by_admicro".*?</div></div>' => '',
-      '<div (id|class)="(?!homepageboxlast)[^<]*</div>' => ''
+      '.*(?=<div class="postpadding")' => '',
+      '<div class="clearfix".*' => '',
+      '<div class="breadcrumb".*?</div>' => '',
+      '<div class="meta".*?(?=<p class="sapo")' => ''
     },
     'news.zing.vn' => {
       '<script.*?</script>' => '',
-      '(?<=href=["\'])/' => '/sites?url=http://news.zing.vn/',
-      '(?<=href=["\'])http://(?=news.zing.vn)' => '/sites?url=http://',
-      '<div class="zingtop".*(?=<div class="zingcomponent")' => '',
-      '<p class="local_timer".*?</p>' => '',
-      '<div class="topnews_slideshow" id="topnew_slideshow_2".*?(?=<ul)' => '</div>',
-      '<div class="sidecol_blk02 blk_topphoto".*?(?=<div class="sidecol_blk04 blk_topicnews")' => '',
-      '<div class="sidecol_blk03 hotline_box".*?(?=<div class="sidecol_blk04 blk_topicnews")' => '',
-      '<div class="newsfilter".*(?=<div class="znews_rightcol")' => '</div>',
-      '<p class="followZinglive".*?</p>' => '',
-      '<div class="share_link".*<!-- begin: Footer -->' => '</div></div></div>',
-      '<iframe.*?</iframe>' => '',
-      '<div class="znews_footer".*(?=</body>)' => '',
-      '(?<=<!-- begin: left column --><div class="znews_leftcol")' => ' style="width: 980px"',
-      '(?<=<div class="newsdetail_wrapper")' => ' style="width: 815px"'
+      '.*(?=<div class="znews_leftcol")' => '',
+      '<!-- end: left column -->.*' => '',
+      '<div id="content_head".*?(?=<div class="newsdetail_wrapper")' => '',
+      '<ul class="share_buttons".*' => '</div></div>'
     },
     'ngoisao.net' => {
       '<script.*?</script>' => '',
