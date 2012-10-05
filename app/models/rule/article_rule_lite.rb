@@ -66,7 +66,6 @@ module Rule::ArticleRuleLite
     },
     'tuoitre.vn' => {
       '<script.*?</script>' => '',
-      '(?<=href=["\'])http://(?=tuoitre.vn(?!/App_Themes))' => '/sites?url=http://',
       '(?<=href=["\'])[.\/]*(?=(App_Themes|Images|Master))' => 'http://tuoitre.vn/',
       '(?<=url\()../(?=Images)' => 'http://tuoitre.vn/',
       '(?<=src=["\'])../(?=App_Themes)' => 'http://tuoitre.vn',
@@ -74,21 +73,16 @@ module Rule::ArticleRuleLite
       '<!--.*' => '</body>'
     },
     'vietnamnet.vn' => {
-      '(?<=href=["\'])/' => '/sites?url=http://vietnamnet.vn/',
-      '<div class="topPage".*(?=<div class="menuTopBox")' => '',
-      '<a class="logoPage".*?</a>' => '',
-      '(?<=<div class="menuTopBoxContentInside")' => ' style="margin-left: 0"',
-      '<div class="updateTimeBox".*?</div>' => '',
-      '<div class="hotlinevnn".*?(?=<script)' => '',
-      '<div class="right grey margin-top-5".*?(?=</div><div class="articleDetailBox")' => '',
-      '<div comment2.*?(?=<div class="padding-10")' => '',
-      '<div class="columnsPageCenterRight clearfix".*?<!--\[bottomPage\]-->' => '</div></div></div></div>',
-      '(?<=<div class="columnsPageLeft")' => ' style="width: 1000px"'
+      '<script.*?</script>' => '',
+      '(?<=</head>).*?(?=<div class="articleDetailBox")' => '<body>',
+      '<div comment2="true".*' => '</body>'
     },
     'vn.news.yahoo.com' => {
       '<script.*?</script>' => '',
-      '<div id="header".*?(?=<div class="yom-mod yom-nav")' => '',
-      '<footer>.*?</footer>' => ''
+      '(?<=</head>).*?(?=<div class="yog-wrap yog-grid yog-24u")' => '<body>',
+      '<div class="yom-mod yom-ib-list" id="mediainfinitebrowselisttemp".*' => '</div></div></body>',
+      '(?<=</h1>).*?(?=</div>)' => '',
+      '<div class="yom-mod social-buttons".*?(?=<div class="yom-mod yom-art-content)' => ''
     },
     'vnexpress.net' => {
       '\/\/<!\[CDATA\[.*?\/\/\]\]>' => '',
