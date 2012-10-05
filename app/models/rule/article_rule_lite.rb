@@ -52,10 +52,9 @@ module Rule::ArticleRuleLite
       '<script.*?</script>' => '',
       '(?<=href=["\'])/' => 'http://ngoisao.net/',
       '(?<=src=["\'])/' => 'http://ngoisao.net/',
-      '.*(?=<div class="detailCT")' => '',
-      '<div class="relateNewsDetail".*' => '</div>',
+      '(?<=</head>).*?<div class="detailCT"' => '<body style="background: none"><div',
+      '<div class="detailNS".*' => '</div></body>',
       '<div class="topDetail".*?(?=<[Hh]1)' => '',
-      '[Hh]2' => 'h4'
     },
     'tiin.vn' => {
       '<script.*?</script>' => '',
