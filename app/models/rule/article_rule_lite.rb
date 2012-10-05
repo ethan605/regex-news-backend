@@ -87,20 +87,10 @@ module Rule::ArticleRuleLite
     'vnexpress.net' => {
       '\/\/<!\[CDATA\[.*?\/\/\]\]>' => '',
       '<script.*?</script>' => '',
-      '(?<=href=["\'])/(?=([Ll]ibrary|[Rr]esource|[Ii]mages|[Ff]iles))' => 'http://vnexpress.net/',
-      '(?<=src=["\'])/(?=([Ll]ibrary|[Rr]esource|[Ii]mages|[Ff]iles))' => 'http://vnexpress.net/',
-      '(?<=href=["\'])/' => '/sites?url=http://vnexpress.net/',
-      '(?<=href=["\'])http://(?=vnexpress.net/(?!([Ll]ibrary|[Rr]esource|[Ii]mages|[Ff]iles)))' => '/sites?url=http://',
-      '<div class="fpr2".*(?=<div id="menu")' => '',
-      '<div id="mn-search".*(?=<div class="menu">)' => '</div>',
-      '<div id="footer".*(?=</body>)' => '</div></div>',
-      '<div class="email-print txtr".*(?=<div class="content")' => '',
-      '<div class="likesubject fl".*(?=<div class="tag-parent")' => '',
-      '<div class="box-item".*(?=<div class="Div_OtherNews")' => '</div>',
-      '<div id="linksiteEH".*(?=</div><div id="content")' => '',
-      '<div class="content-left fl".*(?=</body>)' => '</div></div></div>',
-      '(?<=<div class="content-center fl")' => ' style="width: 990px"',
-      '(?<=<div class="folder-header")' => ' style="width: 990px"'
+      '(?<=href=["\'])/' => 'http://vnexpress.net/',
+      '(?<=src=["\'])/' => 'http://vnexpress.net/',
+      '(?<=</head>).*?(?=<div class="content")' => '<body>',
+      '<div class="likesubject fl".*' => '</div></body>'
     }
   }
 end
