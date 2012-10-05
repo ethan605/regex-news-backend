@@ -29,24 +29,27 @@ module Rule::ArticleRuleLite
     'dantri.com.vn' => {
       '<script.*?</script>' => '',
       '(?<=href=["\'])/' => 'http://dantri.com.vn/',
-      '.*(?=<div id="ctl00_IDContent_ctl00_divContent")' => '',
-      '(?<=<div id="ctl00_IDContent_ctl00_divContent">).*?</p>' => '',
-      '<div itemscope.*' => '</div>',
-      'h2' => 'p'
+      '(?<=</head>).*?(?=<div id="ctl00_IDContent_ctl00_divContent")' => '<body style="background: none">',
+      '<div itemscope.*' => '</div></body>',
+      '<div class="box26".*?</div>' => ''
     },
     'kenh14.vn' => {
       '<script.*?</script>' => '',
-      '.*(?=<div class="postpadding")' => '',
-      '<div class="clearfix".*' => '',
+      '(?<=</head>).*?(?=<div class="postwrapper clearfix")' => '<body>',
+      '<div class="clearfix".*' => '</body>',
       '<div class="breadcrumb".*?</div>' => '',
-      '<div class="meta".*?(?=<p class="sapo")' => ''
+      '<div class="meta".*?(?=<p class="sapo")' => '',
+      '(?<=<div class="postwrapper clearfix")' => ' style="width: 100%"'
     },
     'news.zing.vn' => {
       '<script.*?</script>' => '',
-      '.*(?=<div class="znews_leftcol")' => '',
-      '<!-- end: left column -->.*' => '',
-      '<div id="content_head".*?(?=<div class="newsdetail_wrapper")' => '',
-      '<ul class="share_buttons".*' => '</div></div>'
+      '(?<=</head>).*?(?=<div class="znews_leftcol")' => '<body>',
+      '<!-- end: left column -->.*' => '</body>',
+      '<div class="subheader".*?</div>' => '',
+      '<div id="detail_sidebar".*?(?=<div class="newsdetail_wrapper")' => '',
+      '<ul class="share_buttons".*' => '</div></div></body>',
+      '(?<=<div class="znews_leftcol")' => ' style="width: 100%"',
+      '(?<=<div class="newsdetail_wrapper" id="content_document")' => ' style="width: 100%; padding: 0;"'
     },
     'ngoisao.net' => {
       '<script.*?</script>' => '',
