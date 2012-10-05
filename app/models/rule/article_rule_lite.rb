@@ -50,33 +50,19 @@ module Rule::ArticleRuleLite
     },
     'ngoisao.net' => {
       '<script.*?</script>' => '',
-      '(?<=href=["\'])http://(?=ngoisao.net)' => '/sites?url=http://',
-      '(?<=href=["\'])/(?=([Rr]esource|[Ss]ervice|[Ll]ibrary|[Ii]mages|[Ff]iles))' => 'http://ngoisao.net/',
-      '(?<=src=["\'])/(?=([Rr]esource|[Ss]ervice|[Ll]ibrary|[Ii]mages|[Ff]iles))' => 'http://ngoisao.net/',
-      '(?<=href=["\'])/' => '/sites?url=http://ngoisao.net/',
-      '(?<=url\()/[Ii]mages/[^\)]*' => '',
-      '<div id="taskbar_top".*(?=<div id="wrapper-container")' => '',
-      '<div id="header".*(?=<div id="content")' => '',
-      '<div id="footer".*(?=</body>)' => '</div></div></div>',
-      '<div class="topDetail".*?(?=<H1)' => '',
-      '<div class="detailNS".*(?=<div class="relateNewsDetail")' => '',
-      '<div class="adv".*(?=<div class="Div_OtherNews")' => '',
-      '<div class="tnhome".*(?=<div class=["\']backStage)' => '',
-      '<div class="midAd".*(?=<div class="fl httw")' => '',
-      '<div class="ad-right-home".*?(?=<div class="fl [c]*nop")' => ''
+      '(?<=href=["\'])/' => 'http://ngoisao.net/',
+      '(?<=src=["\'])/' => 'http://ngoisao.net/',
+      '.*(?=<div class="detailCT")' => '',
+      '<div class="relateNewsDetail".*' => '</div>',
+      '<div class="topDetail".*?(?=<[Hh]1)' => '',
+      '[Hh]2' => 'h4'
     },
     'tiin.vn' => {
       '<script.*?</script>' => '',
-      '(?<=src=["\'])/(?=theme)' => 'http://tiin.vn/',
-      '(?<=href=["\'])/(?!favicon.ico)' => '/sites?url=http://tiin.vn/',
-      '/favicon.ico' => 'http://tiin.vn/favicon.ico',
-      '(?<=url)\([^\)]*' => '(',
-      '<div id="top-header".*(?=<div id="menu-container")' => '',
-      'id="header"' => '',
-      '<div class="fb-like".*(?=<p id="content-header")' => '',
-      '<div class="emailprint".*?</div>' => '',
-      '<div id="other".*(?=<div id="body-content")' => '',
-      '<div id="footer-container".*(?=</body>)' => '</div></div>'
+      '.*?(?=<div id="left-content-container")' => '',
+      '<div id="tag-container".*' => '</div>',
+      '<div id="breadcrumb-container".*?(?=<div id="body-content")' => '',
+      '<ul id="related-link-container".*?</ul>' => ''
     },
     'tuoitre.vn' => {
       '<script.*?</script>' => '',
