@@ -3,7 +3,8 @@ class Rule
   include Mongoid::CachedJson
   include Rule::CommonRules
   include Rule::SiteRules
-  include Rule::ArticleRules
+  # include Rule::ArticleRules
+  include Rule::ArticleRuleLite
 
   field :domain
   field :rules
