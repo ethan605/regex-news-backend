@@ -2,9 +2,7 @@ class Article
   include Mongoid::Document
   include Mongoid::CachedJson
 
-  belongs_to :main, class_name: 'Category', inverse_of: :mains
-  belongs_to :sub, class_name: 'Category', inverse_of: :subs
-  belongs_to :other, class_name: 'Category', inverse_of: :subs
+  belongs_to :category
 
   validates_presence_of :url, :title
   validates_uniqueness_of :url

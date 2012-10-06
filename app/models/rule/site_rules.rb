@@ -1,3 +1,3 @@
-module Rule::SiteRule
+module Rule::SiteRules
   extend ActiveSupport::Concern
 end

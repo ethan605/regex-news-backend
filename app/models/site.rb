@@ -6,8 +6,7 @@ class Site
   field :url
   field :title
   
-  has_many :tops, class_name: 'Category', inverse_of: :top
-  has_many :contents, class_name: 'Category', inverse_of: :content
+  has_many :categories
 
   validates_presence_of :url, :title
   validates_uniqueness_of :update_time
@@ -16,37 +15,23 @@ class Site
     update_time: { definition: :update_time_rfc },
     title: { },
     url: { },
-    tops: { definition: :top_news },
-    contents: { definition: :content_news }
+    categories: { definition: :categories_json }
 
-  def update_category(name, attributes)
+  def update_category(attributes)
     category = Category.find_or_initialize_by(url: attributes[:url])
     category.update_attributes!(attributes)
-    self.send("update_#{name}", category)
+    self.categories << category
+    self.save!
     return category
-  end
-
-  def update_top(category)
-    self.tops << category
-    self.save!
-  end
-
-  def update_content(category)
-    self.contents << category
-    self.save!
   end
 
   def update_time_rfc
     return self.update_time.rfc822
   end
 
-  def top_news
-    return tops.as_json
+  def categories_json
+    return categories.as_json
   end
 
-  def content_news
-    return contents.as_json
-  end
-
-  private :update_top, :update_content, :update_time_rfc, :top_news, :content_news
+  private :update_time_rfc, :categories_json
 end

@@ -1,109 +1,107 @@
 require 'open-uri'
 
 class Rule::Crawler
+  SITE_RULES = {
+    'vnexpress.net' => {
+      url: 'http://vnexpress.net',
+      title: 'VnExpress',
+      content: {
+        top: {
+          selectors: [
+            '#top4 .hotnews-detail',
+            '#top4 .t3-content'  
+          ],
+          rule: {
+            url: '(?<=<a href=")[^>"]*',
+            title: '(?<=>)[\w[^<]]+',
+            image: '(?<=src=")[^>"]*',
+            spoiler: '(?<=<p>)[^>]*(?=<\/p>)'
+          }
+        },
+        categories: {
+          lists: [
+            '/gl/xa-hoi',
+          ],
+          selectors: [
+            '#content .folder-top',
+            '#content .folder-news'
+          ],
+          rule: {
+            url: '(?<=<a href=")[^>"]*',
+            title: '(?<=>)[\w[^<]]+',
+            image: '(?<=src=")[^>"]*',
+            spoiler: '(?<=<p>)[^>]*(?=<\/p>)'
+          }
+        }
+      }
+    }
+  }
+  
   def self.vnexpress
     Article.delete_all
     Category.delete_all
     Site.delete_all
 
-    domain = 'vnexpress.net'
-    page = Nokogiri::HTML(open("http://#{domain}"))
+    agent = Mechanize.new
+    page = Nokogiri::HTML(agent.get('http://vnexpress.net/gl/xa-hoi').content)
 
-    # Init site
-    site = Site.new(url: "http://#{domain}", title: domain)
-    site.save!
-
-    category = site.update_category('top', title: "[#{domain}] Top news")
-
-    # Top news - main article
-    news = page.css('#top4 .hotnews-detail')
-    news.each do |content|
+    SITE_RULES.each do |domain, properties|
+      url = properties[:url]
+      page = Nokogiri::HTML(open(url))
+      
+      # Init site
+      site = Site.find_or_initialize_by(url: url)
       attributes = {
-        url: ensure_url(content.css('a')[0][:href], domain),
-        title: content.css('a')[1].text,
-        image: ensure_url(content.css('img')[0][:src], domain),
-        spoiler: content.css('p')[1].text.gsub(/>.*/, '')
+        update_time: DateTime.now,
+        title: properties[:title]
       }
-      category.update_topic('main', attributes)
-    end
+      site.update_attributes!(attributes)
 
-    # Top news - sub articles
-    news = page.css('#topnews .t3-content')
-    news.each do |content|
-    #   attributes = {
-    #     url: ensure_url(content.css('a')[0][:href], domain),
-    #     title: content.css('a')[1].text,
-    #     image: ensure_url(content.css('img')[0][:src], domain)
-    #   }
-      content = content.to_html
-      content.gsub!(*Rule::STRIP_BETWEEN_TAGS)
-      content.gsub!(*Rule::STRIP_BEFORE_TAGS)
-      content.gsub!(*Rule::STRIP_AFTER_TAGS)
-      attributes = {
-        url: ensure_url(content[/(?<=<a href=")[^>"]*/], domain),
-        title: content[/(?<=>)[\w[^<]]+/],
-        image: ensure_url(content[/(?<=src=")[^>"]*/], domain)
-      }
-      category.update_topic('sub', attributes)
-    end
+      # Top news
+      category = site.update_category(title: "Top news")
+      rule = properties[:content][:top][:rule]
+      properties[:content][:top][:list].each do |selector|
+        news = page.css(selector)
+        news.each do |content|
+          content = content.to_html
+          content.gsub!(*Rule::STRIP_BETWEEN_TAGS)
+          content.gsub!(*Rule::STRIP_BEFORE_TAGS)
+          content.gsub!(*Rule::STRIP_AFTER_TAGS)
 
-    # Top news - other articles
-    news = page.css('#toplist .toplist-content2 li a')
-    news.each do |content|
-      attributes = {
-        url: ensure_url(content[:href], domain),
-        title: content.text
-      }
-      category.update_topic('other', attributes)
-    end
+          attributes = {}
+          rule.each do |field, rule|
+            attributes[field] = ensure_url(content[/#{rule}/], domain) if content[/#{rule}/]
+          end
 
-    ## Content categories
-    contents = page.css('#content .folder')
-    contents.delete(contents.last)
-    contents.each do |content|
-      attributes = {
-        url: ensure_url(content.css('[class^="folder-active"] a')[0][:href], domain),
-        title: content.css('[class^="folder-active"] a')[0].text
-      }
-      category = site.update_category('content', attributes)
-
-      # Content category - Main article
-      news = content.css('.folder-topnews')
-      news.each do |content|
-        attributes = {
-          url: ensure_url(content.css('a')[0][:href], domain),
-          title: content.css('a')[1].text,
-          image: ensure_url(content.css('img')[0][:src], domain),
-          spoiler: content.css('p')[1].text.gsub(/>.*/,'')
-        }
-        category.update_topic('main', attributes)
+          category.update_article(attributes)
+        end
       end
 
-      # Content category - Sub articles
-      news = content.css('.folder-othernews div[class^="other-folder"]')[0]
-      if news
-        attributes = {
-          url: ensure_url(news.css('a')[0][:href], domain),
-          title: news.css('a')[1].text,
-          image: ensure_url(news.css('img')[0][:src], domain)
-        }
+      # Categories news
+      category = site.update_category({title: "Xa hoi", url: "http://vnexpress.net/gl/xa-hoi")
+      rule = properties[:content][:top][:rule]
+      properties[:content][:top][:list].each do |selector|
+        news = page.css(selector)
+        news.each do |content|
+          content = content.to_html
+          content.gsub!(*Rule::STRIP_BETWEEN_TAGS)
+          content.gsub!(*Rule::STRIP_BEFORE_TAGS)
+          content.gsub!(*Rule::STRIP_AFTER_TAGS)
 
-        category.update_topic('sub', attributes)
-      end
+          attributes = {}
+          rule.each do |field, rule|
+            attributes[field] = ensure_url(content[/#{rule}/], domain) if content[/#{rule}/]
+          end
 
-      # Content category - Other articles
-      news = content.css('.folder-othernews div[class^="fl"] ul li a')
-      news.each do |content|
-        attributes = {
-          url: ensure_url(content[:href], domain),
-          title: news.text
-        }
-        category.update_topic('other', attributes)
+          category.update_article(attributes)
+        end
       end
     end
   end
 
   def self.ensure_url(url, domain)
+    return url unless url =~ /^\//
+
     url_pattern = /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$/ix
     unless url =~ url_pattern
       return "http://#{domain}" + url
