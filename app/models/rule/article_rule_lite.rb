@@ -61,8 +61,12 @@ module Rule::ArticleRuleLite
     },
     'tiin.vn' => {
       '<script.*?</script>' => '',
-      '.*?(?=<div id="left-content-container")' => '',
-      '<div id="tag-container".*' => '</div>',
+      # '(?<=src=["\'])/' => 'http://tiin.vn/',
+      # '(?<=href=["\'])/' => '/sites?url=http://tiin.vn/',
+      '(?<=</head>).*?(?=<div id="body-content")' => '<body style="background: none">',
+      '(?<=<div id="body-content")' => ' style="width: 100%"',
+      '<div id="tag-container".*' => '</div></body>',
+      '<div class="fb-like".*?</div>' => '',
       '<div id="breadcrumb-container".*?(?=<div id="body-content")' => '',
       '<ul id="related-link-container".*?</ul>' => ''
     },
