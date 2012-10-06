@@ -61,8 +61,6 @@ module Rule::ArticleRuleLite
     },
     'tiin.vn' => {
       '<script.*?</script>' => '',
-      # '(?<=src=["\'])/' => 'http://tiin.vn/',
-      # '(?<=href=["\'])/' => '/sites?url=http://tiin.vn/',
       '(?<=</head>).*?(?=<div id="body-content")' => '<body style="background: none">',
       '(?<=<div id="body-content")' => ' style="width: 100%"',
       '<div id="tag-container".*' => '</div></body>',
