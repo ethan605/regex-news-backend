@@ -10,19 +10,21 @@ module Rule::ArticleRuleLite
     '24h.com.vn' => {
       '\/\/<!\[CDATA\[.*?\/\/\]\]>' => '',
       '<script.*?</script>' => '',
-      '.*(?=<div class="boxBaiViet-c")' => '',
-      '<div class="boxDon-sub-b"></div><div class="center-Banner".*' => '',
+      '(?<==["\'])\s*/' => 'http://www.24h.com.vn/',
+      '(?<=</head>).*?(?=<div class="boxBaiViet-c")' => '<body>',
+      '<div class="boxDon-sub-b"></div><div class="center-Banner".*' => '</body>',
       '<div class="baivietMainBox-img200".*?(?=<div class="baiviet-TopContent200")' => '',
-      '<div class="publication_date".*?<div class="clear">' => '',
-      '<div id="comment_content">.*' => '',
-      '<div class="shareFB-green".*(?=</div></div>)' => ''
+      '(?<=<div class="baiviet-TopContent200")' => ' style="width: 100%"',
+      '(?<=<div class="boxBaiViet-c")' => ' style="width: 100%; background: none"',
+      '<div class="cap2-boxtop-note".*?(?=<div class="clear")' => '</div>',
+      '<div class="shareFB-green".*' => '</div></div></body>'
     },
     'bongdaplus.vn' => {
       '<script.*?</script>' => '',
       '(?<==["\'])\s*/' => 'http://bongdaplus.vn/',
-      '.*(?=<div class="article alpha")' => '',
-      '<div class="social clearfix".*' => '',
-      '<div class="date".*?(?=<div class="sapo")' => '',
+      '(?<=</head>).*?(?=<div class="article alpha")' => '<body>',
+      '<div class="social clearfix".*' => '</body>',
+      '<div class="fontsize".*?</div>' => '',
       '<p class="like".*?</p>' => '',
       '<div class="tag".*?</div>' => ''
     },
