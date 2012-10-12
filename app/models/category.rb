@@ -19,6 +19,7 @@ class Category
     article.update_attributes!(attributes)
     self.articles << article
     self.save!
+    # puts "Updated article #{article.title}"
   end
 
   def articles_json

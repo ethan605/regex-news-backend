@@ -5,45 +5,38 @@ class Rule::Crawler
     'vnexpress.net' => {
       url: 'http://vnexpress.net',
       title: 'VnExpress',
-      content: {
-        top: {
-          selectors: [
-            '#top4 .hotnews-detail',
-            '#top4 .t3-content'  
-          ],
-          rule: {
-            url: '(?<=<a href=")[^>"]*',
-            title: '(?<=>)[\w[^<]]+',
-            image: '(?<=src=")[^>"]*',
-            spoiler: '(?<=<p>)[^>]*(?=<\/p>)'
-          }
+      categories: {
+        urls: {
+          'Xa Hoi' => '/gl/xa-hoi',
+          'The Gioi' => '/gl/the-gioi',
+          'Kinh Doanh' => '/gl/kinh-doanh',
+          'Phap Luat' => '/gl/phap-luat',
+          'Gia Dinh - Suc Khoe' => '/gl/doi-song',
+          'Khoa Hoc' => '/gl/khoa-hoc',
+          'Oto - Xe May' => '/gl/oto-xe-may',
+          'Ban Doc Viet' => '/gl/ban-doc-viet'
         },
-        categories: {
-          lists: [
-            '/gl/xa-hoi',
-          ],
-          selectors: [
-            '#content .folder-top',
-            '#content .folder-news'
-          ],
-          rule: {
-            url: '(?<=<a href=")[^>"]*',
-            title: '(?<=>)[\w[^<]]+',
-            image: '(?<=src=")[^>"]*',
-            spoiler: '(?<=<p>)[^>]*(?=<\/p>)'
-          }
+        selectors: [
+          '#content .folder-top',
+          '#content .folder-news'
+        ],
+        rules: {
+          url: '(?<=<a href=")[^>"]*',
+          title: '(?<=>)[\w[^<]]+',
+          image: '(?<=src=")[^>"]*',
+          spoiler: '(?<=<p>)[^<]+?(?=<)'
         }
       }
     }
   }
   
-  def self.vnexpress
+  def self.vne
     Article.delete_all
     Category.delete_all
     Site.delete_all
 
-    agent = Mechanize.new
-    page = Nokogiri::HTML(agent.get('http://vnexpress.net/gl/xa-hoi').content)
+    # agent = Mechanize.new
+    # page = Nokogiri::HTML(agent.get('http://vnexpress.net/gl/xa-hoi').content)
 
     SITE_RULES.each do |domain, properties|
       url = properties[:url]
@@ -56,46 +49,38 @@ class Rule::Crawler
         title: properties[:title]
       }
       site.update_attributes!(attributes)
+      
+      # Categories
+      rules = properties[:categories][:rules]
+      
+      properties[:categories][:urls].each do |title, url|
+        category = site.update_category({title: title, url: "http://#{domain}#{url}"})
+        puts "\nCrawled category: #{category.title}"
+        # page = Nokogiri::HTML(Mechanize.new.get("http://#{domain}#{url}").content)
+        page = Nokogiri::HTML(open("http://#{domain}#{url}"))
+        
+        properties[:categories][:selectors].each do |selector|
+          news = page.css(selector)
+          news.each do |content|
+            content = content.to_html
+            content.gsub!(*Rule::STRIP_BETWEEN_TAGS)
+            content.gsub!(*Rule::STRIP_BEFORE_TAGS)
+            content.gsub!(*Rule::STRIP_AFTER_TAGS)
 
-      # Top news
-      category = site.update_category(title: "Top news")
-      rule = properties[:content][:top][:rule]
-      properties[:content][:top][:list].each do |selector|
-        news = page.css(selector)
-        news.each do |content|
-          content = content.to_html
-          content.gsub!(*Rule::STRIP_BETWEEN_TAGS)
-          content.gsub!(*Rule::STRIP_BEFORE_TAGS)
-          content.gsub!(*Rule::STRIP_AFTER_TAGS)
+            attributes = {}
+            rules.each do |field, rule|
+              attributes[field] = ensure_url(content[/#{rule}/], domain) if content[/#{rule}/]
+            end
 
-          attributes = {}
-          rule.each do |field, rule|
-            attributes[field] = ensure_url(content[/#{rule}/], domain) if content[/#{rule}/]
+            if (attributes[:spoiler])
+              category.update_article(attributes)
+              puts "Crawled article: #{attributes[:title]}"
+            end
           end
-
-          category.update_article(attributes)
         end
       end
 
-      # Categories news
-      category = site.update_category({title: "Xa hoi", url: "http://vnexpress.net/gl/xa-hoi")
-      rule = properties[:content][:top][:rule]
-      properties[:content][:top][:list].each do |selector|
-        news = page.css(selector)
-        news.each do |content|
-          content = content.to_html
-          content.gsub!(*Rule::STRIP_BETWEEN_TAGS)
-          content.gsub!(*Rule::STRIP_BEFORE_TAGS)
-          content.gsub!(*Rule::STRIP_AFTER_TAGS)
-
-          attributes = {}
-          rule.each do |field, rule|
-            attributes[field] = ensure_url(content[/#{rule}/], domain) if content[/#{rule}/]
-          end
-
-          category.update_article(attributes)
-        end
-      end
+      return
     end
   end
 
