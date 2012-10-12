@@ -14,7 +14,8 @@ class Rule::Crawler
           'Gia Dinh - Suc Khoe' => '/gl/doi-song',
           'Khoa Hoc' => '/gl/khoa-hoc',
           'Oto - Xe May' => '/gl/oto-xe-may',
-          'Ban Doc Viet' => '/gl/ban-doc-viet'
+          'Ban Doc Viet' => '/gl/ban-doc-viet',
+          'Tam Su' => '/gl/ban-doc-viet/tam-su'
         },
         selectors: [
           '#content .folder-top',
@@ -30,13 +31,10 @@ class Rule::Crawler
     }
   }
   
-  def self.vne
-    Article.delete_all
-    Category.delete_all
-    Site.delete_all
-
-    # agent = Mechanize.new
-    # page = Nokogiri::HTML(agent.get('http://vnexpress.net/gl/xa-hoi').content)
+  def self.vnexpress
+    # Article.delete_all
+    # Category.delete_all
+    # Site.delete_all
 
     SITE_RULES.each do |domain, properties|
       url = properties[:url]
@@ -56,9 +54,8 @@ class Rule::Crawler
       properties[:categories][:urls].each do |title, url|
         category = site.update_category({title: title, url: "http://#{domain}#{url}"})
         puts "\nCrawled category: #{category.title}"
-        # page = Nokogiri::HTML(Mechanize.new.get("http://#{domain}#{url}").content)
+
         page = Nokogiri::HTML(open("http://#{domain}#{url}"))
-        
         properties[:categories][:selectors].each do |selector|
           news = page.css(selector)
           news.each do |content|

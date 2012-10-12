@@ -17,6 +17,10 @@ class Site
     url: { },
     categories: { definition: :categories_json }
 
+  def self.crawl
+    Rule::Crawler.vnexpress
+  end
+
   def update_category(attributes)
     category = Category.find_or_initialize_by(url: attributes[:url])
     category.update_attributes!(attributes)
