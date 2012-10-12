@@ -17,8 +17,18 @@ class Site
     url: { },
     categories: { definition: :categories_json }
 
-  def self.crawl
-    Rule::Crawler.vnexpress
+  def self.crawl(domain)
+    Rule::Crawler.crawl(domain)
+  end
+
+  def self.crawl_all
+    Article.delete_all
+    Category.delete_all
+    Site.delete_all
+    
+    Rule::Crawler::SITE_RULES.each do |domain, properties|
+      crawl(domain)
+    end
   end
 
   def update_category(attributes)
