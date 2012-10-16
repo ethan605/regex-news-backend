@@ -1,9 +1,10 @@
 class Rule
   include Mongoid::Document
   include Mongoid::CachedJson
+  
   include Rule::CommonRules
-  include Rule::SiteRules
-  include Rule::ArticleRuleLite
+  include Rule::ArticleRules
+  include Rule::ArticleRulesLite
 
   field :domain
   field :rules

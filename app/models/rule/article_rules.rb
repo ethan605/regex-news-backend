@@ -1,7 +1,7 @@
 module Rule::ArticleRules
   extend ActiveSupport::Concern
 
-  CHANGE_ELEMENTS     = {
+  CHANGE_ELEMENTS = {
     '24h.com.vn' => {
       '\/\/<!\[CDATA\[.*?\/\/\]\]>' => '',
       '<script.*?</script>' => '',
