@@ -49,57 +49,57 @@ We have message: <code>/sites/rules|GET|abcdef123456|id|123456|email|test@domain
   </tr>
   <tr>
     <td>http://24h.com.vn</td>
-    <td>[90%]</td>
-    <td>[100%]</td>
-    <td>[0%]</td>
+    <td><center>[90%]</center></td>
+    <td><center>[100%]</center></td>
+    <td><center>[0%]</center></td>
   </tr>
   <tr>
     <td>http://bongdaplus.vn</td>
-    <td>[99%]</td>
-    <td>[100%]</td>
-    <td>[0%]</td>
+    <td><center>[99%]</center></td>
+    <td><center>[100%]</center></td>
+    <td><center>[0%]</center></td>
   </tr>
   <tr>
     <td>http://dantri.com.vn</td>
-    <td>[99%]</td>
-    <td>[100%]</td>
-    <td>[99%]</td>
+    <td><center>[99%]</center></td>
+    <td><center>[100%]</center></td>
+    <td><center>[99%]</center></td>
   </tr>
   <tr>
     <td>http://kenh14.vn</td>
-    <td>[99%]</td>
-    <td>[100%]</td>
-    <td>[0%]</td>
+    <td><center>[99%]</center></td>
+    <td><center>[100%]</center></td>
+    <td><center>[0%]</center></td>
   </tr>
   <tr>
     <td>http://news.zing.vn.vn</td>
-    <td>[99%]</td>
-    <td>[100%]</td>
-    <td>[0%]</td>
+    <td><center>[99%]</center></td>
+    <td><center>[100%]</center></td>
+    <td><center>[0%]</center></td>
   </tr>
   <tr>
     <td>http://ngoisao.net</td>
-    <td>[99%]</td>
-    <td>[100%]</td>
-    <td>[0%]</td>
+    <td><center>[99%]</center></td>
+    <td><center>[100%]</center></td>
+    <td><center>[0%]</center></td>
   </tr>
   <tr>
     <td>http://tuoitre.vn</td>
-    <td>[90%]</td>
-    <td>[100%]</td>
-    <td>[0%]</td>
+    <td><center>[90%]</center></td>
+    <td><center>[100%]</center></td>
+    <td><center>[0%]</center></td>
   </tr>
   <tr>
     <td>http://vietnamnet.vn</td>
-    <td>[99%]</td>
-    <td>[100%]</td>
-    <td>[0%]</td>
+    <td><center>[99%]</center></td>
+    <td><center>[100%]</center></td>
+    <td><center>[0%]</center></td>
   </tr>
   <tr>
     <td>http://vnexpress.net</td>
-    <td>[99%]</td>
-    <td>[100%]</td>
-    <td>[99%]</td>
+    <td><center>[99%]</center></td>
+    <td><center>[100%]</center></td>
+    <td><center>[99%]</center></td>
   </tr>
 </table>
 
