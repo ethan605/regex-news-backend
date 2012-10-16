@@ -42,43 +42,63 @@ We have message: <code>/sites/rules|GET|abcdef123456|id|123456|email|test@domain
 
 <table>
   <tr>
+    <td><strong>Site</strong></td>
+    <td><strong>Rule Progress</strong></td>
+    <td><strong>Rule (Lite) Progress</strong></td>
+    <td><strong>Index Progress</strong></td>
+  </tr>
+  <tr>
     <td>http://24h.com.vn</td>
     <td>[90%]</td>
+    <td>[100%]</td>
+    <td>[0%]</td>
   </tr>
   <tr>
     <td>http://bongdaplus.vn</td>
     <td>[99%]</td>
+    <td>[100%]</td>
+    <td>[0%]</td>
   </tr>
   <tr>
     <td>http://dantri.com.vn</td>
     <td>[99%]</td>
-  </tr>
-  <tr>
-    <td>http://bongdaplus.vn</td>
+    <td>[100%]</td>
     <td>[99%]</td>
   </tr>
   <tr>
     <td>http://kenh14.vn</td>
     <td>[99%]</td>
+    <td>[100%]</td>
+    <td>[0%]</td>
   </tr>
   <tr>
     <td>http://news.zing.vn.vn</td>
     <td>[99%]</td>
+    <td>[100%]</td>
+    <td>[0%]</td>
   </tr>
   <tr>
     <td>http://ngoisao.net</td>
     <td>[99%]</td>
+    <td>[100%]</td>
+    <td>[0%]</td>
   </tr>
   <tr>
     <td>http://tuoitre.vn</td>
     <td>[90%]</td>
+    <td>[100%]</td>
+    <td>[0%]</td>
   </tr>
   <tr>
     <td>http://vietnamnet.vn</td>
     <td>[99%]</td>
+    <td>[100%]</td>
+    <td>[0%]</td>
   </tr>
   <tr>
     <td>http://vnexpress.net</td>
+    <td>[99%]</td>
+    <td>[100%]</td>
     <td>[99%]</td>
   </tr>
 </table>

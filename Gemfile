@@ -12,6 +12,7 @@ gem 'kaminari'
 gem 'nokogiri'
 gem 'mechanize'
 gem 'mongoid_search'
+gem 'bluecloth'
 
 # Gems used only for assets and not required
 # in production environments by default.
