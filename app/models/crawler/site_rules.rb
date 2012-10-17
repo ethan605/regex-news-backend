@@ -2,35 +2,7 @@ module Crawler::SiteRules
   extend ActiveSupport::Concern
 
   SITE_RULES = {
-    'vnexpress.net' => {
-      url: 'http://vnexpress.net',
-      title: 'VnExpress',
-      categories: {
-        urls: {
-          'Xa Hoi' => '/gl/xa-hoi',
-          'The Gioi' => '/gl/the-gioi',
-          'Kinh Doanh' => '/gl/kinh-doanh',
-          'Phap Luat' => '/gl/phap-luat',
-          'Gia Dinh - Suc Khoe' => '/gl/doi-song',
-          'Khoa Hoc' => '/gl/khoa-hoc',
-          'Oto - Xe May' => '/gl/oto-xe-may',
-          'Ban Doc Viet' => '/gl/ban-doc-viet',
-          'Tam Su' => '/gl/ban-doc-viet/tam-su'
-        },
-        selectors: [
-          '#content .folder-top',
-          '#content .folder-news'
-        ],
-        rules: {
-          url: { 'a' => '(?<=href=")[^>"]*' },
-          title: { 'p > a' => '(?<=>)[\w[^\r\n<]]+' },
-          image: { 'a > img' => '(?<=src=")[^>"]+' },
-          spoiler: { 'p:nth-of-type(2)' => '(?<=<p>)[^<]+?(?=<)' }
-        }
-      }
-    },
     'dantri.com.vn' => {
-      url: 'http://dantri.com.vn',
       title: 'Dan Tri',
       categories: {
         urls: {
@@ -60,6 +32,50 @@ module Crawler::SiteRules
           title: { '.mr1 > a' => '(?<=>)[\w[^<]]+' },
           image: { 'a > img' => '(?<=src=")[^>"]*' },
           spoiler: { '.fon5' => '(?<=>)[\w[^<]]+' }
+        }
+      }
+    },
+    'kenh14.vn' => {
+      title: 'Kenh 14',
+      categories: {
+        urls: {
+          'Star' => '/star.chn'
+        },
+        selectors: [
+          '.listnews .item.clearfix',
+          '.featurewrapper.clearfix'
+        ],
+        rules: {
+          url: { '.title a' => '(?<=href=")[^"]*' },
+          title: { '.title a' => '(?<=>)[^<]*' },
+          image: { '.img a img' => '(?<=src=")[^"]*' },
+          spoiler: { '.sapo' => '(?<=>)[^<]*' }
+        }
+      }
+    },
+    'vnexpress.net' => {
+      title: 'VnExpress',
+      categories: {
+        urls: {
+          'Xa Hoi' => '/gl/xa-hoi',
+          'The Gioi' => '/gl/the-gioi',
+          'Kinh Doanh' => '/gl/kinh-doanh',
+          'Phap Luat' => '/gl/phap-luat',
+          'Gia Dinh - Suc Khoe' => '/gl/doi-song',
+          'Khoa Hoc' => '/gl/khoa-hoc',
+          'Oto - Xe May' => '/gl/oto-xe-may',
+          'Ban Doc Viet' => '/gl/ban-doc-viet',
+          'Tam Su' => '/gl/ban-doc-viet/tam-su'
+        },
+        selectors: [
+          '#content .folder-top',
+          '#content .folder-news'
+        ],
+        rules: {
+          url: { 'a' => '(?<=href=")[^>"]*' },
+          title: { 'p > a' => '(?<=>)[\w[^\r\n<]]+' },
+          image: { 'a > img' => '(?<=src=")[^>"]+' },
+          spoiler: { 'p:nth-of-type(2)' => '(?<=<p>)[^<]+?(?=<)' }
         }
       }
     }
