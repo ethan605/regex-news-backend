@@ -9,6 +9,8 @@ class Category
 
   belongs_to :site
 
+  scope :title, ->(cat) { return self.where(title: cat) }
+
   json_fields \
     url: { },
     title: { },

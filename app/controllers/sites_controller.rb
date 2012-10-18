@@ -52,8 +52,24 @@ class SitesController < ApplicationController
   end
 
   def home
-    sites = Site.all
+    if (!params[:domain])
+      render json: { status: 2, message: 'Invalid request' }
+      return
+    end
 
-    render json: sites
+    site = Site.domain(params[:domain]).first
+
+    if (!site)
+      render json: { status: 0, results: [] }
+      return
+    end
+
+    articles = []
+    categories = site.categories.title(params[:category])
+    categories.map do |cat|
+      cat.articles.map { |article| articles << article }
+    end
+
+    render json: { status: 0, results: articles }
   end
 end

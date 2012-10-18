@@ -9,8 +9,10 @@ class Crawler
     Category.delete_all
     Site.delete_all
 
+    crawler = Crawler.new
+
     SITE_RULES.each do |domain, properties|
-      Crawler.new.crawl(domain)
+      crawler.crawl(domain)
     end
   end
 
@@ -48,7 +50,7 @@ class Crawler
 
   def crawl_url(title, url)
     category = @site.update_category({title: title, url: "http://#{@domain}#{url}"})
-    puts "\nCrawling category: #{category.title}"
+    puts "\nCrawling category: #{category.title} from url: http://#{@domain}#{url}"
 
     page = Nokogiri::HTML(open("http://#{@domain}#{url}"))
     @properties[:categories][:selectors].each do |selector|

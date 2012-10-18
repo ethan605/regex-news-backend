@@ -39,7 +39,14 @@ module Crawler::SiteRules
       title: 'Kenh 14',
       categories: {
         urls: {
-          'Star' => '/star.chn'
+          'Star' => [
+            '/star.chn',
+            '/star/sao-viet.chn',
+            '/star/paparazzi.chn'
+          ],
+          # 'Musik' => [
+          #   '/musik.chn'
+          # ]
         },
         selectors: [
           '.listnews .item.clearfix',
@@ -57,15 +64,69 @@ module Crawler::SiteRules
       title: 'VnExpress',
       categories: {
         urls: {
-          'Xa Hoi' => '/gl/xa-hoi',
-          'The Gioi' => '/gl/the-gioi',
-          'Kinh Doanh' => '/gl/kinh-doanh',
-          'Phap Luat' => '/gl/phap-luat',
-          'Gia Dinh - Suc Khoe' => '/gl/doi-song',
-          'Khoa Hoc' => '/gl/khoa-hoc',
-          'Oto - Xe May' => '/gl/oto-xe-may',
-          'Ban Doc Viet' => '/gl/ban-doc-viet',
-          'Tam Su' => '/gl/ban-doc-viet/tam-su'
+          'Xa Hoi' => [
+            '/gl/xa-hoi/giao-duc',
+            '/gl/xa-hoi/nhip-dieu-tre',
+            '/gl/doi-song/cau-chuyen-cuoc-song',
+            '/gl/xa-hoi/du-lich',
+            '/gl/xa-hoi/co-hoi-du-hoc'
+          ],
+          'The Gioi' => [
+            '/gl/the-gioi/cuoc-song-do-day',
+            '/gl/the-gioi/anh',
+            '/gl/the-gioi/nguoi-viet-5-chau',
+            '/gl/the-gioi/phan-tich',
+            '/gl/the-gioi/tu-lieu',
+            '/gl/the-gioi/bau-cu'
+          ],
+          'Kinh Doanh' => [
+            '/gl/kinh-doanh/bat-dong-san',
+            '/gl/kinh-doanh/kinh-nghiem',
+            '/gl/kinh-doanh/quoc-te',
+            '/gl/doi-song/mua-sam',
+            '/gl/kinh-doanh/doanh-nghiep-viet'
+          ],
+          'Phap Luat' => [
+            '/gl/phap-luat/hinh-su',
+            '/gl/phap-luat/ky-su',
+            '/gl/phap-luat/tu-van'
+          ],
+          'Gia Dinh - Suc Khoe' => [
+            '/gl/suc-khoe',
+            '/gl/doi-song/gia-dinh',
+            '/gl/suc-khoe/gioi-tinh',
+            '/gl/doi-song/me-va-be',
+            '/gl/doi-song/am-thuc',
+            '/gl/doi-song/meo-vat',
+            '/gl/doi-song/album',
+            '/gl/suc-khoe/lam-dep'
+          ],
+          'Khoa Hoc' => [
+            '/gl/khoa-hoc/moi-truong',
+            '/gl/khoa-hoc/thien-nhien',
+            '/gl/khoa-hoc/anh',
+            '/gl/khoa-hoc/ky-thuat-moi'
+          ],
+          'Oto - Xe May' => [
+            '/gl/oto-xe-may/tu-van',
+            '/gl/oto-xe-may/thi-truong'
+          ],
+          'Ban Doc Viet' => [
+            '/gl/ban-doc-viet/anh',
+            '/gl/ban-doc-viet/the-gioi',
+            '/gl/ban-doc-viet/van-hoa',
+            '/gl/ban-doc-viet/the-thao',
+            '/gl/ban-doc-viet/kinh-doanh',
+            '/gl/ban-doc-viet/xa-hoi',
+            '/gl/ban-doc-viet/phap-luat',
+            '/gl/ban-doc-viet/doi-song',
+            '/gl/ban-doc-viet/khoa-hoc'
+          ],
+          'Tam Su' => '/gl/ban-doc-viet/tam-su',
+          'Cuoi' => [
+            '/gl/cuoi/anh',
+            '/gl/cuoi/tieu-pham'
+          ]
         },
         selectors: [
           '#content .folder-top',

@@ -42,7 +42,7 @@ class Rule
     #   content.gsub!(/#{from}/m, to)
     # end
 
-    CHANGE_ELEMENTS[domain].each do |from, to|
+    CHANGE_ELEMENTS_LITE[domain].each do |from, to|
       content.gsub!(/#{from}/m, to)
     end
 

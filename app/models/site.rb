@@ -5,6 +5,8 @@ class Site
   field :update_time, type: DateTime, default: ->{ DateTime.now }
   field :url
   field :title
+
+  scope :domain, ->(domain) { return self.where(url: "http://#{domain}") }
   
   has_many :categories
 
@@ -18,7 +20,7 @@ class Site
     categories: { definition: :categories_json }
 
   def self.crawl(domain)
-    Crawler.crawl(domain)
+    Crawler.new.crawl(domain)
   end
 
   def self.crawl_all
