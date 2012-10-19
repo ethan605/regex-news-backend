@@ -63,13 +63,13 @@ We have message: <code>/sites/rules|GET|abcdef123456|id|123456|email|test@domain
     <td>http://dantri.com.vn</td>
     <td><center>[99%]</center></td>
     <td><center>[100%]</center></td>
-    <td><center>[99%]</center></td>
+    <td><center>[100%]</center></td>
   </tr>
   <tr>
     <td>http://kenh14.vn</td>
     <td><center>[99%]</center></td>
     <td><center>[100%]</center></td>
-    <td><center>[0%]</center></td>
+    <td><center>[100%]</center></td>
   </tr>
   <tr>
     <td>http://news.zing.vn.vn</td>
@@ -81,7 +81,7 @@ We have message: <code>/sites/rules|GET|abcdef123456|id|123456|email|test@domain
     <td>http://ngoisao.net</td>
     <td><center>[99%]</center></td>
     <td><center>[100%]</center></td>
-    <td><center>[0%]</center></td>
+    <td><center>[100%]</center></td>
   </tr>
   <tr>
     <td>http://tuoitre.vn</td>
