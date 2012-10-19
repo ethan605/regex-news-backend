@@ -45,6 +45,7 @@ class Crawler
 
           data = rule[1] ? data[rule[1]] : data.text
           attributes[field] = ensure_url(data, @domain)
+          attributes[field].gsub!(/[\n\r]/, '')
         end
 
         if (attributes[:spoiler])
@@ -73,6 +74,7 @@ class Crawler
               html = html.to_html
               html.gsub!(*REMOVE_CONTROLS)
               attributes[field] = ensure_url(html[/#{regex}/], @domain) if html[/#{regex}/]
+              attributes[field].gsub!(/[\n\r]/, '')
             end
           end
         end
