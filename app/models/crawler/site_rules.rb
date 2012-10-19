@@ -118,14 +118,13 @@ module Crawler::SiteRules
           ]
         },
         selectors: [
-          '.listnews .item.clearfix',
-          '.featurewrapper.clearfix'
+          '.item.clearfix',
         ],
         rules: {
-          url: { '.title a' => '(?<=href=")[^"]*' },
-          title: { '.title a' => '(?<=>)[^<]*' },
-          image: { '.img a img' => '(?<=src=")[^"]*' },
-          spoiler: { '.sapo' => '(?<=>)[^<]*' }
+          url: [ '.postcontent > .title > a', 'href' ],
+          title: [ '.postcontent > .title > a' ],
+          image: [ '.img > a > img', 'src' ],
+          spoiler: [ '.sapo' ]
         }
       }
     },

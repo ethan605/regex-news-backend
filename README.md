@@ -45,12 +45,14 @@ We have message: <code>/sites/rules|GET|abcdef123456|id|123456|email|test@domain
     <td><strong>Site</strong></td>
     <td><strong>Rule Progress</strong></td>
     <td><strong>Rule (Lite) Progress</strong></td>
-    <td><strong>Index Progress</strong></td>
+    <td><strong>Index Progress (Pure)</strong></td>
+    <td><strong>Index Progress (Hybrid)</strong></td>
   </tr>
   <tr>
     <td>http://24h.com.vn</td>
     <td><center>[90%]</center></td>
     <td><center>[100%]</center></td>
+    <td><center>[0%]</center></td>
     <td><center>[0%]</center></td>
   </tr>
   <tr>
@@ -58,10 +60,12 @@ We have message: <code>/sites/rules|GET|abcdef123456|id|123456|email|test@domain
     <td><center>[99%]</center></td>
     <td><center>[100%]</center></td>
     <td><center>[0%]</center></td>
+    <td><center>[0%]</center></td>
   </tr>
   <tr>
     <td>http://dantri.com.vn</td>
     <td><center>[99%]</center></td>
+    <td><center>[100%]</center></td>
     <td><center>[100%]</center></td>
     <td><center>[100%]</center></td>
   </tr>
@@ -70,11 +74,13 @@ We have message: <code>/sites/rules|GET|abcdef123456|id|123456|email|test@domain
     <td><center>[99%]</center></td>
     <td><center>[100%]</center></td>
     <td><center>[100%]</center></td>
+    <td><center>[100%]</center></td>
   </tr>
   <tr>
-    <td>http://news.zing.vn.vn</td>
+    <td>http://news.zing.vn</td>
     <td><center>[99%]</center></td>
     <td><center>[100%]</center></td>
+    <td><center>[0%]</center></td>
     <td><center>[0%]</center></td>
   </tr>
   <tr>
@@ -82,11 +88,13 @@ We have message: <code>/sites/rules|GET|abcdef123456|id|123456|email|test@domain
     <td><center>[99%]</center></td>
     <td><center>[100%]</center></td>
     <td><center>[100%]</center></td>
+    <td><center>[0%]</center></td>
   </tr>
   <tr>
     <td>http://tuoitre.vn</td>
     <td><center>[90%]</center></td>
     <td><center>[100%]</center></td>
+    <td><center>[0%]</center></td>
     <td><center>[0%]</center></td>
   </tr>
   <tr>
@@ -94,12 +102,14 @@ We have message: <code>/sites/rules|GET|abcdef123456|id|123456|email|test@domain
     <td><center>[99%]</center></td>
     <td><center>[100%]</center></td>
     <td><center>[0%]</center></td>
+    <td><center>[0%]</center></td>
   </tr>
   <tr>
     <td>http://vnexpress.net</td>
     <td><center>[99%]</center></td>
     <td><center>[100%]</center></td>
-    <td><center>[99%]</center></td>
+    <td><center>[100%]</center></td>
+    <td><center>[100%]</center></td>
   </tr>
 </table>
 
