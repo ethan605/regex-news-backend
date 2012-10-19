@@ -44,9 +44,78 @@ module Crawler::SiteRules
             '/star/sao-viet.chn',
             '/star/paparazzi.chn'
           ],
-          # 'Musik' => [
-          #   '/musik.chn'
-          # ]
+          'Musik' => [
+            '/musik.chn',
+            '/musik/au-my.chn',
+            '/musik/chau-a.chn',
+            '/musik/viet-nam.chn'
+          ],
+          'Cine' => [
+            '/cine.chn',
+            '/cine/mot-phim.chn',
+            '/cine/phim-viet-nam.chn',
+            '/cine/phim-au-my.chn',
+            '/cine/phim-chau-a.chn',
+          ],
+          'Fashion' => [
+            '/fashion.chn',
+            '/fashion/mot-14.chn',
+            '/fashion/xu-huong.chn',
+            '/fashion/teenlook.chn',
+            '/fashion/mix-do.chn',
+            '/fashion/star-style.chn',
+            '/fashion/connect-4u.chn'
+          ],
+          'Doi Song' => [
+            '/doi-song.chn',
+            '/doi-song/xa-hoi.chn',
+            '/doi-song/nhan-vat.chn',
+            '/doi-song/quan-xa.chn',
+            '/doi-song/cau-chuyen-that.chn',
+            '/xem-an-choi.chn'
+          ],
+          'Gioi Tinh' => [
+            '/gioi-tinh.chn',
+            '/gioi-tinh/kien-thuc-gioi-tinh.chn',
+            '/gioi-tinh/dep.chn'
+          ],
+          'Made By Teens' => [
+            '/made-by-teens.chn',
+            '/made-by-teens/handmade.chn',
+            '/made-by-teens/kitchen.chn',
+            '/made-by-teens/meo-vat.chn'
+          ],
+          'La' => '/la.chn',
+          'Sport' => [
+            '/sport.chn',
+            '/sport/bong-da.chn',
+            '/sport/sport-video.chn',
+            '/sport/anh.chn',
+            '/sport/ben-le-san-dau.chn'
+          ],
+          'Teeniscover' => [
+            '/teeniscover.chn',
+            '/teeniscover/khoa-hoc-cong-nghe.chn',
+            '/teeniscover/lich-su-van-hoa.chn',
+            '/teeniscover/thien-nhien-ky-thu.chn',
+            '/teeniscover/thuc-hanh.chn'
+          ],
+          '2 Tek' => [
+            '/2-tek.chn',
+            '/2-tek/cong-nghe-vui.chn',
+            '/2-tek/thu-thuat.chn',
+            '/2-tek/san-pham-moi.chn'
+          ],
+          'Goc Trai Tim' => [
+            '/goc-trai-tim.chn',
+            '/goc-trai-tim/trai-tim-co-nang.chn',
+            '/goc-trai-tim/teen-story.chn'
+          ],
+          'Hoc Duong' => [
+            '/hoc-duong.chn',
+            '/hoc-duong/du-hoc.chn',
+            '/hoc-duong/ban-tin-46.chn'
+          ]
         },
         selectors: [
           '.listnews .item.clearfix',
