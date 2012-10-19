@@ -86,4 +86,17 @@ class Crawler
       return url
     end
   end
+
+  def self.crawl_header
+    page = Mechanize.new.get('http://ngoisao.net')
+    page = Nokogiri.HTML(page.content)
+    menus = page.css("#menu > li")
+
+    menus.each do |menu|
+      urls = menu.css('ul > li > a')
+      urls = urls.map { |url| url[:href] }
+      urls = urls.join("','")
+      "'#{menu[:id]}' => ['#{urls}']"
+    end
+  end
 end

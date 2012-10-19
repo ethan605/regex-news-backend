@@ -129,6 +129,63 @@ module Crawler::SiteRules
         }
       }
     },
+    'ngoisao.net' => {
+      title: 'Ngoi Sao',
+      categories: {
+        urls: {
+          'Hau Truong' => [
+            '/tin-tuc/hau-truong',
+            '/tin-tuc/showbiz-viet',
+            '/tin-tuc/chau-a',
+            '/tin-tuc/hollywood',
+          ],
+          'The Thao' => [
+            '/tin-tuc/ben-le/',
+            '/tin-tuc/the-thao/clip/',
+            '/tin-tuc/the-thao/khoe-dep/'
+          ],
+          'Thoi Cuoc' => [
+            '/tin-tuc/24h',
+            '/tin-tuc/chuyen-la/',
+            '/tin-tuc/hinh-su/',
+            '/tin-tuc/thuong-truong/'
+          ],
+          'Phong Cach' => [
+            '/tin-tuc/thoi-trang/',
+            '/tin-tuc/tam-tinh/',
+            '/tin-tuc/lam-dep/',
+            '/tin-tuc/trac-nghiem/'
+          ],
+          'Thu Gian' => [
+            '/tin-tuc/an-choi-xem/',
+            '/tin-tuc/dan-choi/',
+            '/tin-tuc/cuoi/',
+            '/tin-tuc/game/'
+          ],
+          'Goc Doc Gia' => [
+            '/tin-tuc/choi-blog/',
+            '/tin-tuc/thi-anh/',
+            '/tin-tuc/miss/'
+          ],
+          'Cuoi' => [
+            '/tin-tuc/co-dau/',
+            '/tin-tuc/cam-nang/',
+            '/tin-tuc/anh-cuoi/',
+            '/tin-tuc/chia-se/',
+            '/tin-tuc/binh-chon-anh-cuoi/'
+          ]
+        },
+        selectors: [
+          '.news li'
+        ],
+        rules: {
+          url: { 'a.ptw' => '(?<=href=")[^>"]*' },
+          title: { 'h3 > a' => '(?<=>)[\w[^\r\n<]]+' },
+          image: { 'a > img' => '(?<=src=")[^>"]+' },
+          spoiler: { 'p:nth-of-type(2)' => '(?<=<p>)[^<]+?(?=<)' }
+        }
+      }
+    },
     'vnexpress.net' => {
       title: 'VnExpress',
       categories: {
