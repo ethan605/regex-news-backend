@@ -4,7 +4,7 @@ class Crawler
   include Crawler::SiteRules
   include Rule::CommonRules
   
-  def self.crawl_all
+  def self.crawl_all_pure
     Article.delete_all
     Category.delete_all
     Site.delete_all
@@ -12,13 +12,82 @@ class Crawler
     crawler = Crawler.new
 
     SITE_RULES.each do |domain, properties|
-      crawler.crawl(domain)
+      crawler.crawl_pure(domain)
     end
   end
 
-  def crawl(domain)
+  def self.crawl_all_hybrid
+    Article.delete_all
+    Category.delete_all
+    Site.delete_all
+
+    crawler = Crawler.new
+
+    SITE_RULES.each do |domain, properties|
+      crawler.crawl_hybrid(domain)
+    end
+  end
+
+  def crawl_pure(domain)
+    crawl_preprocess(SITE_RULES_PURE, domain) do |title, url|
+      crawl_url_pure(title, url)
+    end
+  end
+
+  def crawl_url_pure(title, url)
+    crawl_url_preprocess(title, url) do |selector|
+      news = @page.css(selector)
+      news.each do |content|
+        attributes = {}
+        @rules.each do |field, rule|
+          data = content.css(rule[0]).first
+          next unless data
+
+          data = rule[1] ? data[rule[1]] : data.text
+          attributes[field] = ensure_url(data, @domain)
+        end
+
+        if (attributes[:spoiler])
+          @category.update_article(attributes)
+          puts "Crawled article: #{attributes[:title]}"
+        end
+      end
+    end
+  end
+
+  def crawl_hybrid(domain)
+    crawl_preprocess(SITE_RULES_HYBRID, domain) do |title, url|
+      crawl_url_hybrid(title, url)
+    end
+  end
+
+  def crawl_url_hybrid(title, url)
+    crawl_url_preprocess(title, url) do |selector|
+      news = @page.css(selector)
+      news.each do |content|
+        attributes = {}
+        @rules.each do |field, rule|
+          rule.map do |sel, regex|
+            html = content.css(sel).first
+            if html
+              html = html.to_html
+              html.gsub!(*REMOVE_CONTROLS)
+              attributes[field] = ensure_url(html[/#{regex}/], @domain) if html[/#{regex}/]
+            end
+          end
+        end
+
+        if (attributes[:spoiler])
+          @category.update_article(attributes)
+          puts "Crawled article: #{attributes[:title]}"
+        end
+      end
+    end
+  end
+
+  def crawl_preprocess(rules, domain)
     @domain = domain
-    @properties = SITE_RULES[@domain]
+    @properties = rules[@domain]
     url = "http://#{domain}"
     page = Nokogiri::HTML(open(url))
     
@@ -37,10 +106,10 @@ class Crawler
     @properties[:categories][:urls].each do |title, urls|
       if urls.is_a?Array
         urls.each do |url|
-          crawl_url(title, url)
+          yield(title, url)
         end
       else
-        crawl_url(title, urls)
+        yield(title, urls)
       end
     end
 
@@ -48,31 +117,13 @@ class Crawler
     return
   end
 
-  def crawl_url(title, url)
-    category = @site.update_category({title: title, url: "http://#{@domain}#{url}"})
-    puts "\nCrawling category: #{category.title} from url: http://#{@domain}#{url}"
+  def crawl_url_preprocess(title, url)
+    @category = @site.update_category({title: title, url: "http://#{@domain}#{url}"})
+    puts "\nCrawling category: #{@category.title} from url: http://#{@domain}#{url}"
 
-    page = Nokogiri::HTML(open("http://#{@domain}#{url}"))
+    @page = Nokogiri::HTML(open("http://#{@domain}#{url}"))
     @properties[:categories][:selectors].each do |selector|
-      news = page.css(selector)
-      news.each do |content|
-        attributes = {}
-        @rules.each do |field, rule|
-          rule.map do |sel, regex|
-            html = content.css(sel).first
-            if html
-              html = html.to_html
-              html.gsub!(*REMOVE_CONTROLS)
-              attributes[field] = ensure_url(html[/#{regex}/], @domain) if html[/#{regex}/]
-            end
-          end
-        end
-
-        if (attributes[:spoiler])
-          category.update_article(attributes)
-          puts "Crawled article: #{attributes[:title]}"
-        end
-      end
+      yield(selector)
     end
   end
 
@@ -88,7 +139,7 @@ class Crawler
   end
 
   def self.crawl_header
-    page = Mechanize.new.get('http://ngoisao.net')
+    page = Mechanize.new.get('http://vnexpress.net/gl/the-gioi/')
     page = Nokogiri.HTML(page.content)
     menus = page.css("#menu > li")
 
